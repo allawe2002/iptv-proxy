@@ -42,7 +42,7 @@ hls_template = '''
         <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
     </div>
 
-    <h3>Sample AL Jadeed TV:</h3>
+    <h3>AL Jadeed TV:</h3>
     <div class="player-container">
         <video id="player2" width="640" height="360" controls></video>
         <br/>
@@ -50,6 +50,13 @@ hls_template = '''
     </div>
 
     <h3>Al Jazeera Live:</h3>
+    <div class="player-container">
+        <video id="player3" width="640" height="360" controls></video>
+        <br/>
+        <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
+    </div>
+
+    <h3>Al Mayadeen:</h3>
     <div class="player-container">
         <video id="player3" width="640" height="360" controls></video>
         <br/>
@@ -82,6 +89,7 @@ hls_template = '''
         setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8');
         setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8');
         setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8');
+        setupHLS('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8');
     </script>
 </body>
 </html>
