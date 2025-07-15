@@ -1,8 +1,33 @@
-from flask import Flask, request, Response
+
+from flask import Flask, send_file, Response, request
 import requests
 from urllib.parse import urljoin, urlencode
 
 app = Flask(__name__)
+
+html_page = '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TwinStream</title>
+</head>
+<body style="text-align:center; font-family:Arial, sans-serif;">
+    <h1>Welcome to <span style="color:#007BFF;">TwinStream</span> Proxy</h1>
+    <img src="/logo" alt="TwinStream Logo" style="max-width:300px;"/>
+    <p>Enjoy seamless streaming through our proxy service.</p>
+</body>
+</html>
+'''
+
+@app.route('/')
+def home():
+    return Response(html_page, mimetype='text/html')
+
+@app.route('/logo')
+def logo():
+    return send_file('TwinStream_logo.png', mimetype='image/png')
 
 @app.route('/proxy/')
 def proxy():
