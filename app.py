@@ -27,6 +27,7 @@ hls_template = '''
         .title { color: #007BFF; }
         .description { font-size: 18px; margin-bottom: 20px; }
         .player-container { margin: 20px auto; width: 640px; }
+        .stop-btn { margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -37,11 +38,22 @@ hls_template = '''
     <h3>Live Oman TV:</h3>
     <div class="player-container">
         <video id="player1" width="640" height="360" controls></video>
+        <br/>
+        <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
     </div>
 
     <h3>Sample Channel 2:</h3>
     <div class="player-container">
         <video id="player2" width="640" height="360" controls></video>
+        <br/>
+        <button class="stop-btn" onclick="stopPlayer('player2')">Stop</button>
+    </div>
+
+    <h3>Al Jazeera Live:</h3>
+    <div class="player-container">
+        <video id="player3" width="640" height="360" controls></video>
+        <br/>
+        <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
     </div>
 
     <script>
@@ -51,13 +63,25 @@ hls_template = '''
                 var hls = new Hls();
                 hls.loadSource(streamUrl);
                 hls.attachMedia(video);
+                video.hlsInstance = hls;  // store hls instance
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = streamUrl;
             }
         }
 
+        function stopPlayer(playerId) {
+            var video = document.getElementById(playerId);
+            if (video.hlsInstance) {
+                video.hlsInstance.destroy();
+                video.hlsInstance = null;
+            }
+            video.pause();
+            video.src = "";
+        }
+
         setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8');
-        setupHLS('player2', '/proxy/?url=https://example.com/sample.m3u8');
+        setupHLS('player2', '/proxy/?url=https://moiptvhls-i.akamaihd.net/hls/live/652107/xrtvi/index.m3u8');
+        setupHLS('player3', '/proxy/?url=https://live-hls-web-aje.getaj.net/AJE/index.m3u8');
     </script>
 </body>
 </html>
