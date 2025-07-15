@@ -1,4 +1,3 @@
-
 from flask import Flask, request, Response, send_file
 import requests
 from urllib.parse import urljoin, urlencode
@@ -36,14 +35,13 @@ def proxy():
                 if line.strip().startswith('#') or line.strip() == '':
                     return line + '\n'
                 absolute_url = urljoin(base_url, line.strip())
-                proxied_url = f"/proxy/?{{urlencode({{'url': absolute_url}})}}"
+                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
                 return proxied_url + '\n'
 
             rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
             return Response(rewritten_content, content_type=content_type)
 
-        return Response(resp.iter_content(chunk_size=8192),
-                        content_type=content_type)
+        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
 
