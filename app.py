@@ -1,34 +1,34 @@
 
-from flask import Flask, request, Response, send_file
+from flask import Flask, request, Response, send_file, render_template_string, redirect, url_for
 import requests
 from urllib.parse import urljoin, urlencode
 
 app = Flask(__name__)
 
-@app.route('/')
+PASSCODE = "372420"
+
+login_form = '''
+    <h2>🔒 Protected Page</h2>
+    <form method="post">
+        <input type="password" name="passcode" placeholder="Enter Passcode"/>
+        <input type="submit" value="Access"/>
+    </form>
+'''
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return '''
-        <html>
-        <head>
-            <title>TwinStreamTV Proxy</title>
-            <style>
-                body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
-                .logo { margin: 20px; }
-                .title { color: #007BFF; }
-                .description { font-size: 18px; margin-bottom: 20px; }
-                .channel-link { display: block; margin: 5px; color: #007BFF; text-decoration: none; }
-            </style>
-        </head>
-        <body>
-            <h1 class="title">Welcome to TwinStreamTV Proxy</h1>
-            <img class="logo" src="/logo" alt="TwinStreamTV Logo" width="200"/>
-            <p class="description">Enjoy seamless streaming through our proxy service.</p>
-            <h3>Sample Channels:</h3>
-            <a class="channel-link" href="/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8" target="_blank">Watch Oman TV</a>
-            <a class="channel-link" href="/proxy/?url=https://example.com/sample.m3u8" target="_blank">Sample Channel 2</a>
-        </body>
-        </html>
-    '''
+    if request.method == 'POST':
+        code = request.form.get('passcode')
+        if code == PASSCODE:
+            return '''
+                <h1>Welcome to <span style="color:blue">TwinStreamTV</span> Proxy</h1>
+                <img src="/logo" alt="TwinStreamTV Logo" width="300"/>
+                <p>Enjoy seamless streaming through our proxy service.</p>
+            '''
+        else:
+            return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
+
+    return login_form
 
 @app.route('/proxy/')
 def proxy():
