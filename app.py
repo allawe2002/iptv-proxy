@@ -1,4 +1,3 @@
-
 from flask import Flask, request, Response, send_file
 import requests
 
@@ -18,13 +17,19 @@ def proxy():
     if not url:
         return 'Missing url parameter', 400
 
-    try:
-        resp = requests.get(url, stream=True)
-        excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
-        headers = [(name, value) for (name, value) in resp.raw.headers.items()
-                   if name.lower() not in excluded_headers]
+    # إرسال الهيدرز مع الطلب لضمان قبول السيرفر
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
+        'Referer': 'https://adtv.ae/'
+    }
 
-        return Response(resp.iter_content(chunk_size=8192), headers=headers, status=resp.status_code)
+    try:
+        resp = requests.get(url, headers=headers, stream=True)
+        excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+        response_headers = [(name, value) for (name, value) in resp.raw.headers.items()
+                            if name.lower() not in excluded_headers]
+
+        return Response(resp.iter_content(chunk_size=8192), headers=response_headers, status=resp.status_code)
     except Exception as e:
         return f'Error fetching URL: {str(e)}', 500
 
