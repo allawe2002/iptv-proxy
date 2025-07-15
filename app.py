@@ -81,6 +81,7 @@ hls_template = '''
 
         setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8');
         setupHLS('player2', '/proxy/?url=https://moiptvhls-i.akamaihd.net/hls/live/652107/xrtvi/index.m3u8');
+        setupHLS('player3', '/proxy/?url=https://vo-live-media.cdb.cdn.orange.com/Content/Channel/EmiratesChannel/HLS/index.m3u8');
         setupHLS('player3', '/proxy/?url=https://live-hls-web-aje.getaj.net/AJE/index.m3u8');
     </script>
 </body>
