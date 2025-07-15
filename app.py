@@ -5,7 +5,7 @@ from urllib.parse import urljoin, urlencode
 
 app = Flask(__name__)
 
-PASSCODE = "1234"
+PASSCODE = "372420"
 
 login_form = '''
     <h2>🔒 Protected Page</h2>
@@ -15,31 +15,62 @@ login_form = '''
     </form>
 '''
 
+hls_template = '''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TwinStreamTV Proxy</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
+        .logo { margin: 20px; }
+        .title { color: #007BFF; }
+        .description { font-size: 18px; margin-bottom: 20px; }
+        .player-container { margin: 20px auto; width: 640px; }
+    </style>
+</head>
+<body>
+    <h1 class="title">Welcome to TwinStreamTV Proxy</h1>
+    <img class="logo" src="/logo" alt="TwinStreamTV Logo" width="200"/>
+    <p class="description">Enjoy seamless streaming through our proxy service.</p>
+
+    <h3>Live Oman TV:</h3>
+    <div class="player-container">
+        <video id="player1" width="640" height="360" controls></video>
+    </div>
+
+    <h3>Sample Channel 2:</h3>
+    <div class="player-container">
+        <video id="player2" width="640" height="360" controls></video>
+    </div>
+
+    <script>
+        function setupHLS(playerId, streamUrl) {
+            var video = document.getElementById(playerId);
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+            }
+        }
+
+        setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8');
+        setupHLS('player2', '/proxy/?url=https://example.com/sample.m3u8');
+    </script>
+</body>
+</html>
+'''
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         code = request.form.get('passcode')
         if code == PASSCODE:
-            return '''
-                <h1>Welcome to <span style="color:blue">TwinStreamTV</span> Proxy</h1>
-                <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
-                <p>Enjoy seamless streaming through our proxy service.</p>
-
-                <h3>Live Oman TV:</h3>
-                <video width="640" height="360" controls>
-                    <source src="/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8" type="application/x-mpegURL">
-                    Your browser does not support the video tag.
-                </video>
-
-                <h3>Sample Channel 2:</h3>
-                <video width="640" height="360" controls>
-                    <source src="/proxy/?url=https://example.com/sample.m3u8" type="application/x-mpegURL">
-                    Your browser does not support the video tag.
-                </video>
-            '''
+            return hls_template
         else:
             return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
-
     return login_form
 
 @app.route('/proxy/')
