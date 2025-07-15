@@ -42,7 +42,7 @@ hls_template = '''
         <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
     </div>
 
-    <h3>Sample Channel 2:</h3>
+    <h3>Sample AL Jadeed TV:</h3>
     <div class="player-container">
         <video id="player2" width="640" height="360" controls></video>
         <br/>
