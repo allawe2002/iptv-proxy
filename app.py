@@ -1,4 +1,3 @@
-
 from flask import Flask, request, Response, send_file
 import requests
 from urllib.parse import urljoin, urlencode
@@ -22,45 +21,48 @@ hls_template = '''
     <title>TwinStreamTV Proxy</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; }
-        .logo { margin: 20px; }
-        .title { color: #007BFF; }
-        .description { font-size: 18px; margin-bottom: 20px; }
-        .player-container { margin: 20px auto; width: 640px; }
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
+        .channel-container { display: flex; align-items: center; background: #333; color: #fff; margin: 10px; padding: 10px; border-radius: 8px; }
+        .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
+        .channel-info { display: flex; flex-direction: column; }
+        .channel-info h3 { margin: 0 0 10px 0; }
         .stop-btn { margin-top: 5px; }
     </style>
 </head>
 <body>
-    <h1 class="title">Welcome to TwinStreamTV Proxy</h1>
-    <img class="logo" src="/logo" alt="TwinStreamTV Logo" width="200"/>
-    <p class="description">Enjoy seamless streaming through our proxy service.</p>
+    <h1>Welcome to TwinStreamTV Proxy</h1>
+    <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
 
-    <h3>Live Oman TV:</h3>
-    <div class="player-container">
-        <video id="player1" width="640" height="360" controls></video>
-        <br/>
-        <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
+    <div class="channel-container">
+        <video id="player1" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Oman TV</h3>
+            <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
+        </div>
     </div>
 
-    <h3>AL Jadeed TV:</h3>
-    <div class="player-container">
-        <video id="player2" width="640" height="360" controls></video>
-        <br/>
-        <button class="stop-btn" onclick="stopPlayer('player2')">Stop</button>
+    <div class="channel-container">
+        <video id="player2" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>AL Jadeed TV</h3>
+            <button class="stop-btn" onclick="stopPlayer('player2')">Stop</button>
+        </div>
     </div>
 
-    <h3>Al Jazeera Live:</h3>
-    <div class="player-container">
-        <video id="player3" width="640" height="360" controls></video>
-        <br/>
-        <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
+    <div class="channel-container">
+        <video id="player3" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Al Jazeera Live</h3>
+            <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
+        </div>
     </div>
 
-    <h3>Al Mayadeen:</h3>
-    <div class="player-container">
-        <video id="player4" width="640" height="360" controls></video>
-        <br/>
-        <button class="stop-btn" onclick="stopPlayer('player4')">Stop</button>
+    <div class="channel-container">
+        <video id="player4" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Al Mayadeen</h3>
+            <button class="stop-btn" onclick="stopPlayer('player4')">Stop</button>
+        </div>
     </div>
 
     <script>
@@ -70,7 +72,7 @@ hls_template = '''
                 var hls = new Hls();
                 hls.loadSource(streamUrl);
                 hls.attachMedia(video);
-                video.hlsInstance = hls;  // store hls instance
+                video.hlsInstance = hls;
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = streamUrl;
             }
