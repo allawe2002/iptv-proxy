@@ -65,7 +65,7 @@ hls_template = '''
         <video id="player4" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
-            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
         </div>
     </div>
 
