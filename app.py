@@ -48,7 +48,7 @@ hls_template = '''
     <div class="channel-container">
         <video id="player2" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>AL Jadeed TV</h3>
+            <h3>🐋  🎀  𝒜𝐿 𝒥𝒶𝒹𝑒𝑒𝒹 𝒯𝒱  🎀  🐋</h3>
             <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
         </div>
     </div>
