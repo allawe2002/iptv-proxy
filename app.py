@@ -14,9 +14,126 @@ login_form = '''
     </form>
 '''
 
-# --- Your hls_template with 7 channels remains as you provided ---
+hls_template = '''
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TwinStreamTV Proxy</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
+        .channel-container { display: flex; align-items: center; background: #333; color: #fff; margin: 10px; padding: 10px; border-radius: 8px; }
+        .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
+        .channel-info { display: flex; flex-direction: column; }
+        .channel-info h3 { margin: 0 0 10px 0; }
+        .control-btn { margin-top: 5px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    
 
-# REPLACE ONLY THE /proxy/ ROUTE BELOW:
+    <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
+
+    <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner"/>
+
+
+<div class="channel-container">
+        <video id="player1" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>🍫 ⋆ 🍭  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍫</h3>
+            <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+
+    <div class="channel-container">
+        <video id="player2" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>🐋  🎀  𝒜𝐿 𝒥𝒶𝒹𝑒𝑒𝒹 𝒯𝒱  🎀  🐋</h3>
+            <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+    <div class="channel-container">
+        <video id="player3" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>🐙  🎀  𝑀𝐵𝒞-𝟤  🎀  🐙</h3>
+            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://edge66.magictvbox.com/liveApple/MBC_2/index.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+
+    <div class="channel-container">
+        <video id="player4" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
+            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+
+    <div class="channel-container">
+        <video id="player5" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
+            <button class="control-btn" onclick="toggleStream('player5', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+
+        <div class="channel-container">
+        <video id="player6" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>⚛🌌  🎀  𝑀𝒯𝒱 𝐿𝐸𝐵𝒜𝒩🍩𝒩 𝒯𝒱  🎀  🌌⚛</h3>
+            <button class="control-btn" onclick="toggleStream('player6', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
+       </div>
+     </div>
+    
+    <div class="channel-container">
+        <video id="player7" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>⋆`  🎀  𝒩𝐵𝒩 𝒯𝒱  🎀  `⋆</h3>
+            <button class="control-btn" onclick="toggleStream('player7', '/proxy/?url=http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
+     </div>
+    
+    <script>
+        function setupHLS(video, streamUrl) {
+            if (video.hlsInstance) {
+                video.hlsInstance.destroy();
+            }
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                video.hlsInstance = hls;
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+            }
+        }
+
+        function toggleStream(playerId, streamUrl) {
+            var video = document.getElementById(playerId);
+            if (video.hlsInstance || !video.paused) {
+                if (video.hlsInstance) {
+                    video.hlsInstance.destroy();
+                    video.hlsInstance = null;
+                }
+                video.pause();
+                video.src = "";
+            } else {
+                setupHLS(video, streamUrl);
+                video.play();
+            }
+        }
+    </script>
+</body>
+</html>
+'''
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        code = request.form.get('passcode')
+        if code == PASSCODE:
+            return hls_template
+        else:
+            return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
+    return login_form
 
 @app.route('/proxy/')
 def proxy():
@@ -25,10 +142,8 @@ def proxy():
         return "❌ Missing 'url' query parameter", 400
 
     headers = {
-        'User-Agent': 'VLC/3.0.11 LibVLC/3.0.11',
-        'Referer': 'https://edge66.magictvbox.com/',
-        'Origin': 'https://edge66.magictvbox.com/',
-        'Connection': 'keep-alive'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
+        'Referer': 'https://adtv.ae/'
     }
 
     try:
