@@ -47,7 +47,7 @@ hls_template = '''
     <div class="channel-info">
         <h3>Al Jadeed TV</h3>
         <button onclick="setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play</button>
-        <button onclick="stopPlayer('player1')">Stop</button>
+        <button onclick="stopPlayer('player2')">Stop</button>
     </div>
 </div>
 
@@ -56,10 +56,10 @@ hls_template = '''
     <div class="channel-info">
         <h3>Al Jazeera TV</h3>
         <button onclick="setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play</button>
-        <button onclick="stopPlayer('player1')">Stop</button>
-        </div>
-    
-<div class="channel-container">
+        <button onclick="stopPlayer('player3')">Stop</button>
+    </div>
+</div>
+    <div class="channel-container">
     <video id="player4" width="320" height="180" controls></video>
     <div class="channel-info">
         <h3>Al Mayadeen TV</h3>
