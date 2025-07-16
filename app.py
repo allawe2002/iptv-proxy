@@ -40,14 +40,14 @@ hls_template = '''
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
         </div>
     </div>
-         
-<div class="channel-container">
+
+    <div class="channel-container">
         <video id="player2" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>AL Jadeed TV</h3>
             <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
         </div>
-        </div>
+    </div>
 
     <div class="channel-container">
         <video id="player3" width="320" height="180" controls></video>
@@ -55,6 +55,7 @@ hls_template = '''
             <h3>Al Jazeera Live</h3>
             <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
+    </div>
 
     <div class="channel-container">
         <video id="player4" width="320" height="180" controls></video>
