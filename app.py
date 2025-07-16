@@ -42,31 +42,32 @@ hls_template = '''
     </div>
 </div>
 
-    </div>
-
     <div class="channel-container">
-        <video id="player2" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>AL Jadeed TV</h3>
-            <button class="stop-btn" onclick="stopPlayer('player2')">Stop</button>
-        </div>
+    <video id="player1\2" width="320" height="180" controls></video>
+    <div class="channel-info">
+        <h3>Oman TV</h3>
+        <button onclick="setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play</button>
+        <button onclick="stopPlayer('player1')">Stop</button>
     </div>
+</div>
 
-    <div class="channel-container">
-        <video id="player3" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Al Jazeera Live</h3>
-            <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
+     <div class="channel-container">
+    <video id="player3" width="320" height="180" controls></video>
+    <div class="channel-info">
+        <h3>Oman TV</h3>
+        <button onclick="setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play</button>
+        <button onclick="stopPlayer('player1')">Stop</button>
         </div>
+    
+<div class="channel-container">
+    
+    <video id="player1" width="320" height="180" controls></video>
+    <div class="channel-info">
+        <h3>Oman TV</h3>
+        <button onclick="setupHLS('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play</button>
+        <button onclick="stopPlayer('player4')">Stop</button>
     </div>
-
-    <div class="channel-container">
-        <video id="player4" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Al Mayadeen</h3>
-            <button class="stop-btn" onclick="stopPlayer('player4')">Stop</button>
-        </div>
-    </div>
+</div>
 
     <script>
         function setupHLS(playerId, streamUrl) {
