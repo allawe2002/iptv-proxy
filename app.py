@@ -39,7 +39,10 @@ hls_template = '''
     white-space: nowrap;
 }
 
-    <img src="/logo" alt="My IPTV Logo" class="logo-banner"/>
+    <h1 class="main-title">Welcome to TwinStreamTV Proxy</h1>
+    
+    <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner"/>
+
     .logo-banner {
     display: block;
     width: 100%;
