@@ -32,7 +32,7 @@ hls_template = '''
 <body>
     
 
-    <h1 class="main-title">Ｗｅｌｃｏｍｅ ｔｏ ＴｗｉｎＳｔｒｅａｍＴＶ Ｐｒｏｘｙ</h1>
+    <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
 
     <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner"/>
 
