@@ -33,7 +33,7 @@ hls_template = '''
     <h1>Welcome to TwinStreamTV Proxy</h1>
     <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
 
-    <div class="channel-container">
+<div class="channel-container">
     <video id="player1" width="320" height="180" controls></video>
     <div class="channel-info">
         <h3>Oman TV</h3>
@@ -43,27 +43,26 @@ hls_template = '''
 </div>
 
     <div class="channel-container">
-    <video id="player1\2" width="320" height="180" controls></video>
+    <video id="player2" width="320" height="180" controls></video>
     <div class="channel-info">
-        <h3>Oman TV</h3>
+        <h3>Al Jadeed TV</h3>
         <button onclick="setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play</button>
         <button onclick="stopPlayer('player1')">Stop</button>
     </div>
 </div>
 
-     <div class="channel-container">
+<div class="channel-container">
     <video id="player3" width="320" height="180" controls></video>
     <div class="channel-info">
-        <h3>Oman TV</h3>
+        <h3>Al Jazeera TV</h3>
         <button onclick="setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play</button>
         <button onclick="stopPlayer('player1')">Stop</button>
         </div>
     
 <div class="channel-container">
-    
-    <video id="player1" width="320" height="180" controls></video>
+    <video id="player4" width="320" height="180" controls></video>
     <div class="channel-info">
-        <h3>Oman TV</h3>
+        <h3>Al Mayadeen TV</h3>
         <button onclick="setupHLS('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play</button>
         <button onclick="stopPlayer('player4')">Stop</button>
     </div>
