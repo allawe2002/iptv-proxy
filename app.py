@@ -80,7 +80,7 @@ hls_template = '''
         <video id="player6" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>⚛🌌  🎀  𝑀𝒯𝒱 𝐿𝐸𝐵𝒜𝒩🍩𝒩 𝒯𝒱  🎀  🌌⚛</h3>
-            <button class="control-btn" onclick="toggleStream('player6', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player6', 'https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
        </div>
      </div>
     
