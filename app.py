@@ -40,7 +40,7 @@ hls_template = '''
 <div class="channel-container">
         <video id="player1" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>Oman TV</h3>
+            <h3>🎂  🎀  ❀𝓂𝒶𝓃 𝒯𝒱  🎀  🎂</h3>
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
         </div>
     </div>
@@ -56,7 +56,7 @@ hls_template = '''
     <div class="channel-container">
         <video id="player3" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>Al Jazeera Live</h3>
+            <h3>`•.,¸¸,.•´¯   🎀  𝒜𝓁 𝒥𝒶𝓏𝑒𝑒𝓇𝒶 𝒯𝒱  🎀   ¯´•.,¸¸,.•`</h3>
             <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
     </div>
@@ -64,7 +64,7 @@ hls_template = '''
     <div class="channel-container">
         <video id="player4" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>Al Mayadeen</h3>
+            <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
             <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
         </div>
     </div>
