@@ -135,15 +135,13 @@ def home():
             return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
     return login_form
 
-@app.route('/proxy/')
-def proxy():
-    target_url = request.args.get('url')
-    if not target_url:
-        return "❌ Missing 'url' query parameter", 400
-
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
-        'Referer': 'https://adtv.ae/'
+        'User-Agent': 'VLC/3.0.11 LibVLC/3.0.11',
+        'Referer': 'https://edge66.magictvbox.com/',
+        'Origin': 'https://edge66.magictvbox.com/',
+        'Connection': 'keep-alive'
+    }
+
     }
 
     try:
