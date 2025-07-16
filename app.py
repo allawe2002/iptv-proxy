@@ -30,27 +30,13 @@ hls_template = '''
     </style>
 </head>
 <body>
-    .visually-hidden {
-    position: absolute !important;
-    height: 1px; 
-    width: 1px; 
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
+    
 }
 
     <h1 class="main-title">Welcome to TwinStreamTV Proxy</h1>
     
     <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner"/>
 
-    .logo-banner {
-    display: block;
-    width: 100%;
-    max-height: 150px;
-    object-fit: contain;
-    margin: 0;
-    background: transparent;
-    border: none;
 }
 
 <div class="channel-container">
