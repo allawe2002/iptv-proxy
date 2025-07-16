@@ -14,100 +14,9 @@ login_form = '''
     </form>
 '''
 
-hls_template = '''
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TwinStreamTV Proxy</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-        .channel-container { display: flex; align-items: center; background: #333; color: #fff; margin: 10px; padding: 10px; border-radius: 8px; }
-        .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
-        .channel-info { display: flex; flex-direction: column; }
-        .channel-info h3 { margin: 0 0 10px 0; }
-        .control-btn { margin-top: 5px; margin-right: 5px; }
-    </style>
-</head>
-<body>
-    <h1>Welcome to TwinStreamTV Proxy</h1>
-    <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
+# --- Your hls_template with 7 channels remains as you provided ---
 
-    <div class="channel-container">
-        <video id="player1" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Oman TV</h3>
-            <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
-        </div>
-    </div>
-
-    <div class="channel-container">
-        <video id="player2" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>AL Jadeed TV</h3>
-            <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
-        </div>
-    </div>
-
-    <div class="channel-container">
-        <video id="player3" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Al Jazeera Live</h3>
-            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
-        </div>
-    </div>
-
-    <div class="channel-container">
-        <video id="player4" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Al Mayadeen</h3>
-            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
-        </div>
-    </div>
-
-    <script>
-        function setupHLS(video, streamUrl) {
-            if (video.hlsInstance) {
-                video.hlsInstance.destroy();
-            }
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(streamUrl);
-                hls.attachMedia(video);
-                video.hlsInstance = hls;
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = streamUrl;
-            }
-        }
-
-        function toggleStream(playerId, streamUrl) {
-            var video = document.getElementById(playerId);
-            if (video.hlsInstance || !video.paused) {
-                if (video.hlsInstance) {
-                    video.hlsInstance.destroy();
-                    video.hlsInstance = null;
-                }
-                video.pause();
-                video.src = "";
-            } else {
-                setupHLS(video, streamUrl);
-                video.play();
-            }
-        }
-    </script>
-</body>
-</html>
-'''
-
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST':
-        code = request.form.get('passcode')
-        if code == PASSCODE:
-            return hls_template
-        else:
-            return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
-    return login_form
+# REPLACE ONLY THE /proxy/ ROUTE BELOW:
 
 @app.route('/proxy/')
 def proxy():
@@ -116,8 +25,10 @@ def proxy():
         return "❌ Missing 'url' query parameter", 400
 
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
-        'Referer': 'https://adtv.ae/'
+        'User-Agent': 'VLC/3.0.11 LibVLC/3.0.11',
+        'Referer': 'https://edge66.magictvbox.com/',
+        'Origin': 'https://edge66.magictvbox.com/',
+        'Connection': 'keep-alive'
     }
 
     try:
