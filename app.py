@@ -26,51 +26,50 @@ hls_template = '''
         .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
         .channel-info { display: flex; flex-direction: column; }
         .channel-info h3 { margin: 0 0 10px 0; }
-        .stop-btn { margin-top: 5px; }
+        .control-btn { margin-top: 5px; margin-right: 5px; }
     </style>
 </head>
 <body>
     <h1>Welcome to TwinStreamTV Proxy</h1>
     <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
 
-<div class="channel-container">
-    <video id="player1" width="320" height="180" controls></video>
-    <div class="channel-info">
-        <h3>Oman TV</h3>
-        <button onclick="setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play</button>
-        <button onclick="stopPlayer('player1')">Stop</button>
+    <div class="channel-container">
+        <video id="player1" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Oman TV</h3>
+            <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
+        </div>
     </div>
-</div>
 
     <div class="channel-container">
-    <video id="player2" width="320" height="180" controls></video>
-    <div class="channel-info">
-        <h3>Al Jadeed TV</h3>
-        <button onclick="setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play</button>
-        <button onclick="stopPlayer('player2')">Stop</button>
+        <video id="player2" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>AL Jadeed TV</h3>
+            <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
+        </div>
     </div>
-</div>
 
-<div class="channel-container">
-    <video id="player3" width="320" height="180" controls></video>
-    <div class="channel-info">
-        <h3>Al Jazeera TV</h3>
-        <button onclick="setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play</button>
-        <button onclick="stopPlayer('player3')">Stop</button>
-    </div>
-</div>
     <div class="channel-container">
-    <video id="player4" width="320" height="180" controls></video>
-    <div class="channel-info">
-        <h3>Al Mayadeen TV</h3>
-        <button onclick="setupHLS('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play</button>
-        <button onclick="stopPlayer('player4')">Stop</button>
+        <video id="player3" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Al Jazeera Live</h3>
+            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
+        </div>
     </div>
-</div>
+
+    <div class="channel-container">
+        <video id="player4" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>Al Mayadeen</h3>
+            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
+        </div>
+    </div>
 
     <script>
-        function setupHLS(playerId, streamUrl) {
-            var video = document.getElementById(playerId);
+        function setupHLS(video, streamUrl) {
+            if (video.hlsInstance) {
+                video.hlsInstance.destroy();
+            }
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(streamUrl);
@@ -81,20 +80,20 @@ hls_template = '''
             }
         }
 
-        function stopPlayer(playerId) {
+        function toggleStream(playerId, streamUrl) {
             var video = document.getElementById(playerId);
-            if (video.hlsInstance) {
-                video.hlsInstance.destroy();
-                video.hlsInstance = null;
+            if (video.hlsInstance || !video.paused) {
+                if (video.hlsInstance) {
+                    video.hlsInstance.destroy();
+                    video.hlsInstance = null;
+                }
+                video.pause();
+                video.src = "";
+            } else {
+                setupHLS(video, streamUrl);
+                video.play();
             }
-            video.pause();
-            video.src = "";
         }
-
-        setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8');
-        setupHLS('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8');
-        setupHLS('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8');
-        setupHLS('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8');
     </script>
 </body>
 </html>
