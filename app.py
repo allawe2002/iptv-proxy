@@ -34,11 +34,14 @@ hls_template = '''
     <img src="/logo" alt="TwinStreamTV Logo" width="200"/>
 
     <div class="channel-container">
-        <video id="player1" width="320" height="180" controls></video>
-        <div class="channel-info">
-            <h3>Oman TV</h3>
-            <button class="stop-btn" onclick="stopPlayer('player1')">Stop</button>
-        </div>
+    <video id="player1" width="320" height="180" controls></video>
+    <div class="channel-info">
+        <h3>Oman TV</h3>
+        <button onclick="setupHLS('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play</button>
+        <button onclick="stopPlayer('player1')">Stop</button>
+    </div>
+</div>
+
     </div>
 
     <div class="channel-container">
