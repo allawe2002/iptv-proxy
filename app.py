@@ -31,13 +31,11 @@ hls_template = '''
 </head>
 <body>
     
-}
 
     <h1 class="main-title">Welcome to TwinStreamTV Proxy</h1>
     
     <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner"/>
 
-}
 
 <div class="channel-container">
         <video id="player1" width="320" height="180" controls></video>
