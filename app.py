@@ -36,9 +36,10 @@ hls_template = '''
     display: block;
     width: 100%;
     max-height: 150px;
-    object-fit: cover;
-    margin: 0 auto 20px auto;
-    background-color: white;
+    object-fit: contain;
+    margin: 0;
+    background: transparent;
+    border: none;
 }
 
 <div class="channel-container">
