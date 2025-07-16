@@ -31,9 +31,17 @@ hls_template = '''
 </head>
 <body>
     <h1>Welcome to TwinStreamTV Proxy</h1>
-    <img src="/logo" alt="TwinStreamTV Logo" width="400"/>
+    <img src="/logo" alt="My IPTV Logo" class="logo-banner"/>
+    .logo-banner {
+    display: block;
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    margin: 0 auto 20px auto;
+    background-color: white;
+}
 
-    <div class="channel-container">
+<div class="channel-container">
         <video id="player1" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>Oman TV</h3>
