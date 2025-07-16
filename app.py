@@ -56,7 +56,7 @@ hls_template = '''
         <video id="player3" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🐙  🎀  𝑀𝐵𝒞-𝟤  🎀  🐙</h3>
-            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://edge66.magictvbox.com/liveApple/MBC_2/index.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player3', 'https://edge66.magictvbox.com/liveApple/MBC_2/index.m3u8')">Play/Stop</button>
         </div>
     </div>
 
