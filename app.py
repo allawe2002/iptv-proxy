@@ -58,9 +58,9 @@ hls_template = '''
 
     <h3>Al Mayadeen:</h3>
     <div class="player-container">
-        <video id="player3" width="640" height="360" controls></video>
+        <video id="player4" width="640" height="360" controls></video>
         <br/>
-        <button class="stop-btn" onclick="stopPlayer('player3')">Stop</button>
+        <button class="stop-btn" onclick="stopPlayer('player4')">Stop</button>
     </div>
 
     <script>
