@@ -39,7 +39,7 @@ hls_template = '''
             <h3>Oman TV</h3>
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
         </div>
-         </div>
+         
 <div class="channel-container">
         <video id="player2" width="320" height="180" controls></video>
         <div class="channel-info">
