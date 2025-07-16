@@ -52,36 +52,43 @@ hls_template = '''
             <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
         </div>
     </div>
-
     <div class="channel-container">
         <video id="player3" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
-            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
+            <h3>🐙  🎀  𝑀𝐵𝒞-𝟤  🎀  🐙</h3>
+            <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://edge66.magictvbox.com/liveApple/MBC_2/index.m3u8')">Play/Stop</button>
         </div>
     </div>
 
     <div class="channel-container">
         <video id="player4" width="320" height="180" controls></video>
         <div class="channel-info">
+            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
+            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
+        </div>
+    </div>
+
+    <div class="channel-container">
+        <video id="player5" width="320" height="180" controls></video>
+        <div class="channel-info">
             <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
-            <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player5', '/proxy/?url=https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
         </div>
     </div>
 
         <div class="channel-container">
-        <video id="player5" width="320" height="180" controls></video>
+        <video id="player6" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>⚛🌌  🎀  𝑀𝒯𝒱 𝐿𝐸𝐵𝒜𝒩🍩𝒩 𝒯𝒱  🎀  🌌⚛</h3>
-            <button class="control-btn" onclick="toggleStream('player5', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player6', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
        </div>
      </div>
     
     <div class="channel-container">
-        <video id="player6" width="320" height="180" controls></video>
+        <video id="player7" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>⋆`  🎀  𝒩𝐵𝒩 𝒯𝒱  🎀  `⋆</h3>
-            <button class="control-btn" onclick="toggleStream('player6', '/proxy/?url=http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player7', '/proxy/?url=http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
      </div>
     
     <script>
