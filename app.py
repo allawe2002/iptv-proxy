@@ -40,8 +40,8 @@ hls_template = '''
 <div class="channel-container">
         <video id="player1" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>🎂  🎀  ❀𝓂𝒶𝓃 𝒯𝒱  🎀  🎂</h3>
-            <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://partneta.cdn.mgmlcdn.com/omantv/smil:omantv.stream.smil/chunklist.m3u8')">Play/Stop</button>
+            <h3>🍫 ⋆ 🍭  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍫</h3>
+            <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
 
@@ -56,7 +56,7 @@ hls_template = '''
     <div class="channel-container">
         <video id="player3" width="320" height="180" controls></video>
         <div class="channel-info">
-            <h3>`•.,¸¸,.•´¯   🎀  𝒜𝓁 𝒥𝒶𝓏𝑒𝑒𝓇𝒶 𝒯𝒱  🎀   ¯´•.,¸¸,.•`</h3>
+            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
             <button class="control-btn" onclick="toggleStream('player3', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
     </div>
