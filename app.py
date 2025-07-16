@@ -30,7 +30,15 @@ hls_template = '''
     </style>
 </head>
 <body>
-    <h1>Welcome to TwinStreamTV Proxy</h1>
+    .visually-hidden {
+    position: absolute !important;
+    height: 1px; 
+    width: 1px; 
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
     <img src="/logo" alt="My IPTV Logo" class="logo-banner"/>
     .logo-banner {
     display: block;
