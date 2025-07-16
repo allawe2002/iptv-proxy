@@ -74,8 +74,16 @@ hls_template = '''
         <div class="channel-info">
             <h3>⚛🌌  🎀  𝑀𝒯𝒱 𝐿𝐸𝐵𝒜𝒩🍩𝒩 𝒯𝒱  🎀  🌌⚛</h3>
             <button class="control-btn" onclick="toggleStream('player5', '/proxy/?url=https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
-    </div>
-
+       </div>
+     </div>
+    
+    <div class="channel-container">
+        <video id="player6" width="320" height="180" controls></video>
+        <div class="channel-info">
+            <h3>⋆`  🎀  𝒩𝐵𝒩 𝒯𝒱  🎀  `⋆</h3>
+            <button class="control-btn" onclick="toggleStream('player6', '/proxy/?url=http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
+     </div>
+    
     <script>
         function setupHLS(video, streamUrl) {
             if (video.hlsInstance) {
