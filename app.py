@@ -7,14 +7,18 @@ app = Flask(__name__)
 PASSCODE = "372420"
 
 login_form = '''
-    <h2>🔒 Protected Page</h2>
-    <form method="post">
-        <input type="password" name="passcode" placeholder="Enter Passcode" 
-               style="width: 300px; height: 40px; font-size: 18px; padding: 5px;"/>
-        <br><br>
-        <input type="submit" value="Access" 
-               style="width: 150px; height: 40px; font-size: 16px;"/>
-    </form>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background-color: #1e1e1e; color: white;">
+        <img src="/static/logos/TwinStream.png" alt="TwinStreamTV Logo" style="width: 300px; margin-bottom: 20px;">
+        <h2>🆆🅴🅻🅲🅾🅼🅴 🆃🅾 🆃🆆🅸🅽🆂🆃🆁🅴🅰🅼🆃🆅</h2>
+        <form method="post" style="text-align: center;">
+            <input type="password" name="passcode" placeholder="Enter Passcode"
+                   style="width: 300px; height: 45px; font-size: 18px; padding: 5px; margin-bottom: 15px;
+                   border: 2px solid #007BFF; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);"/>
+            <br>
+            <input type="submit" value="Access"
+                   style="width: 150px; height: 45px; font-size: 18px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"/>
+        </form>
+    </div>
 '''
 
 hls_template = '''
