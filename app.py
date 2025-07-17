@@ -186,7 +186,7 @@ def proxy():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
         'Referer': 'https://adtv.ae/'
-    }
+   
 
     # Special headers for 404focusnotfound.com
     if "404focusnotfound.com" in target_url:
