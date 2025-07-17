@@ -9,8 +9,11 @@ PASSCODE = "372420"
 login_form = '''
     <h2>🔒 Protected Page</h2>
     <form method="post">
-        <input type="password" name="passcode" placeholder="Enter Passcode"/>
-        <input type="submit" value="Access"/>
+        <input type="password" name="passcode" placeholder="Enter Passcode" 
+               style="width: 300px; height: 40px; font-size: 18px; padding: 5px;"/>
+        <br><br>
+        <input type="submit" value="Access" 
+               style="width: 150px; height: 40px; font-size: 16px;"/>
     </form>
 '''
 
