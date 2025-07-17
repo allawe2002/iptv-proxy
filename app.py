@@ -24,6 +24,9 @@ login_form = '''
     </div>
 '''
 
+    </div>
+'''
+
 hls_template = '''
 <!DOCTYPE html>
 <html>
