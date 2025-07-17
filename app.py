@@ -91,6 +91,7 @@ hls_template = '''
      </div>
     
     <div class="channel-container">
+        <img src="/static/logos/nbn.png" alt="NBN Logo" width="100">
         <video id="player7" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>⋆`  🎀  𝒩𝐵𝒩 𝒯𝒱  🎀  `⋆</h3>
