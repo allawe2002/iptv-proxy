@@ -26,7 +26,19 @@ hls_template = '''
         .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
         .channel-info { display: flex; flex-direction: column; }
         .channel-info h3 { margin: 0 0 10px 0; }
-        .control-btn { margin-top: 5px; margin-right: 5px; }
+        .control-btn {
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 10px 20px;  /* Adjusts vertical & horizontal size */
+    font-size: 16px;     /* Increases text size */
+    height: 50px;        /* Directly controls button height */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
     </style>
 </head>
 <body>
