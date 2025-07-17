@@ -20,6 +20,7 @@ login_form = '''
                    style="width: 150px; height: 45px; font-size: 18px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"/>
         </form>
     </div>
+'''
 
 hls_template = '''
 <!DOCTYPE html>
