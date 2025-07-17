@@ -10,6 +10,7 @@ login_form = '''
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background-color: #1e1e1e; color: white;">
         <img src="/static/logos/TwinStream.png" alt="TwinStreamTV Logo" style="width: 300px; margin-bottom: 20px;">
         <h2>🆆🅴🅻🅲🅾🅼🅴 🆃🅾 🆃🆆🅸🅽🆂🆃🆁🅴🅰🅼🆃🆅</h2>
+
         <form method="post" style="text-align: center;">
             <input type="password" name="passcode" placeholder="Enter Passcode"
                    style="width: 300px; height: 45px; font-size: 18px; padding: 5px; margin-bottom: 15px;
@@ -19,13 +20,7 @@ login_form = '''
                    style="width: 150px; height: 45px; font-size: 18px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"/>
         </form>
     </div>
-'''
-
     </div>
-'''
-
-    </div>
-'''
 
 hls_template = '''
 <!DOCTYPE html>
