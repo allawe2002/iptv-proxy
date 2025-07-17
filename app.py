@@ -38,6 +38,7 @@ hls_template = '''
 
 
 <div class="channel-container">
+        <img src="/static/logos/alaraby.png" alt="Alaraby Logo" width="100">
         <video id="player1" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🍫 ⋆ 🍭  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍫</h3>
@@ -46,6 +47,7 @@ hls_template = '''
     </div>
 
     <div class="channel-container">
+        <img src="/static/logos/aljadeed.png" alt="Al jadeed Logo" width="100">
         <video id="player2" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🐋  🎀  𝒜𝐿 𝒥𝒶𝒹𝑒𝑒𝒹 𝒯𝒱  🎀  🐋</h3>
@@ -53,6 +55,7 @@ hls_template = '''
         </div>
     </div>
     <div class="channel-container">
+        <img src="/static/logos/mbc2.png" alt="MBC2 Logo" width="100">
         <video id="player3" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🐙  🎀  𝑀𝐵𝒞-𝟤  🎀  🐙</h3>
@@ -61,6 +64,7 @@ hls_template = '''
     </div>
 
     <div class="channel-container">
+        <img src="/static/logos/aljazeera.png" alt="Al jazeera Logo" width="100">
         <video id="player4" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
