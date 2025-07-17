@@ -24,6 +24,7 @@ login_form = '''
 hls_template = '''
 <!DOCTYPE html>
 <html>
+ ...
 <head>
     <title>TwinStreamTV Proxy</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
