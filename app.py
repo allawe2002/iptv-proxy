@@ -112,7 +112,7 @@ hls_template = '''
      </div>
 
      <div class="channel-container">
-        <img src="/static/logos/nbn.png" alt="TLC Logo" width="100">
+        <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
         <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
         <div class="channel-info">
             <h3>🍑 ⋆ 🍉  🎀  𝒯𝐿𝒞 🍩𝒮𝒩  🎀  🍉 ⋆ 🍑</h3>
