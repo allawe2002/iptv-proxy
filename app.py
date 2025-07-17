@@ -11,10 +11,10 @@ login_form = '''
         <img src="/static/logos/TwinStream.png" alt="TwinStreamTV Logo" style="width: 300px; margin-bottom: 20px;">
         <h2>🆆🅴🅻🅲🅾🅼🅴 🆃🅾 🆃🆆🅸🅽🆂🆃🆁🅴🅰🅼🆃🆅</h2>
 
-        <form method="post" style="text-align: center;">
-            <input type="password" name="passcode" placeholder="Enter Passcode"
-                   style="width: 300px; height: 45px; font-size: 18px; padding: 5px; margin-bottom: 15px;
-                   border: 2px solid #007BFF; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.3);"/>
+        <input type="password" name="passcode" placeholder="Enter Passcode"
+       style="width: 300px; height: 45px; font-size: 18px; padding: 5px; margin-bottom: 15px;
+       border: 2px solid #007BFF; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.3);"/>
+
             <br>
             <input type="submit" value="Access"
                    style="width: 150px; height: 45px; font-size: 18px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"/>
