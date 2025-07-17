@@ -39,7 +39,7 @@ hls_template = '''
 
 <div class="channel-container">
         <img src="/static/logos/alaraby.png" alt="Alaraby Logo" width="100">
-        <video id="player1" width="320" height="180" controls></video>
+        <video id="player1" width="320" height="180" controls poster="/static/logos/alaraby.png"></video>
         <div class="channel-info">
             <h3>🍫 ⋆ 🍭  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍫</h3>
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
