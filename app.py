@@ -46,7 +46,7 @@ hls_template = '''
 
     <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
 
-    <img src="/static/logos/TwinStreamTV.png" alt="TwinStreamTV Logo" 
+    <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
      style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
 
 <div class="channel-container">
