@@ -218,8 +218,6 @@ def proxy():
         return f"❌ Error fetching the URL: {e}", 500
 
 
-    }
-
     try:
         resp = requests.get(target_url, headers=headers, stream=True)
         content_type = resp.headers.get('Content-Type', '')
