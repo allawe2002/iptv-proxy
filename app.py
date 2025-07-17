@@ -121,13 +121,17 @@ hls_template = '''
      </div>
 
      <div class="channel-container">
-        <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
-        <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
-        <div class="channel-info">
-            <h3>🍑 ⋆ 🍉  🎀  𝒯𝐿𝒞 🍩𝒮𝒩  🎀  🍉 ⋆ 🍑</h3>
-            <button class="control-btn" onclick="toggleStream('player8', 'http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8&play_token=72E19255AF0D91DD0AD713012761C715')">
-            Play/Stop</button>
+    <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
+    <video id="playerTLC" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
+    <div class="channel-info">
+        <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
+        <button class="control-btn"
+            onclick="toggleStream('playerTLC', '/proxy/?url=http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8&play_token=72E19255AF0D91DD0AD713012761C715')">
+            Play/Stop
+        </button>
     </div>
+</div>
+
     <script>
         function setupHLS(video, streamUrl) {
             if (video.hlsInstance) {
@@ -178,9 +182,39 @@ def proxy():
     if not target_url:
         return "❌ Missing 'url' query parameter", 400
 
+    # Default headers
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
         'Referer': 'https://adtv.ae/'
+    }
+
+    # If the URL is for 404focusnotfound.com, override headers
+    if "404focusnotfound.com" in target_url:
+        headers['User-Agent'] = 'VLC/3.0.11 LibVLC/3.0.11'
+        headers['Referer'] = 'http://404focusnotfound.com/'
+        headers['Origin'] = 'http://404focusnotfound.com/'
+
+    try:
+        resp = requests.get(target_url, headers=headers, stream=True)
+        content_type = resp.headers.get('Content-Type', '')
+
+        if 'application/vnd.apple.mpegurl' in content_type or '.m3u8' in target_url:
+            original_content = resp.text
+            base_url = target_url.rsplit('/', 1)[0] + '/'
+
+            def rewrite_line(line):
+                if line.strip().startswith('#') or line.strip() == '':
+                    return line + '\n'
+                absolute_url = urljoin(base_url, line.strip())
+                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
+                return proxied_url + '\n'
+
+            rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
+            return Response(rewritten_content, content_type=content_type)
+
+        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
+    except Exception as e:
+        return f"❌ Error fetching the URL: {e}", 500
     }
 
     try:
