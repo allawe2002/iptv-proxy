@@ -188,7 +188,7 @@ def proxy():
         'Referer': 'https://adtv.ae/'
     }
 
-    # If the URL is for 404focusnotfound.com, override headers
+    # Special headers for 404focusnotfound.com
     if "404focusnotfound.com" in target_url:
         headers['User-Agent'] = 'VLC/3.0.11 LibVLC/3.0.11'
         headers['Referer'] = 'http://404focusnotfound.com/'
@@ -213,8 +213,10 @@ def proxy():
             return Response(rewritten_content, content_type=content_type)
 
         return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
+
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
+
     }
 
     try:
