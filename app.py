@@ -73,7 +73,7 @@ hls_template = '''
     </div>
 
     <div class="channel-container">
-        <img src="/static/logos/alamayadeen.png" alt="Almayadeen Logo" width="100">
+        <img src="/static/logos/almayadeen.png" alt="Almayadeen Logo" width="100">
         <video id="player5" width="320" height="180" controls></video>
         <div class="channel-info">
             <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
