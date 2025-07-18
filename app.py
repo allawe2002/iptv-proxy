@@ -122,12 +122,10 @@ hls_template = '''
 
      <div class="channel-container">
     <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
-    <video id="playerTLC" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
+    <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
-        <button class="control-btn"
-            onclick="toggleStream('http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8')">
-            Play/Stop
+        <button class="control-btn" onclick="toggleStream('('player8', http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8')">Play/Stop
         </button>
     </div>
 </div>
