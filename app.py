@@ -186,8 +186,8 @@ def proxy():
         'Referer': 'https://adtv.ae/'
     }
 
-    # Special headers for 404focusnotfound.com
-    if "404focusnotfound.com" in target_url:
+    # Special headers for certain domains
+    if "404focusnotfound.com" in target_url or "iptvplatinum.net" in target_url:
         headers['User-Agent'] = 'VLC/3.0.11 LibVLC/3.0.11'
         headers['Referer'] = 'http://404focusnotfound.com/'
         headers['Origin'] = 'http://404focusnotfound.com/'
@@ -215,28 +215,6 @@ def proxy():
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
 
-
-    try:
-        resp = requests.get(target_url, headers=headers, stream=True)
-        content_type = resp.headers.get('Content-Type', '')
-
-        if 'application/vnd.apple.mpegurl' in content_type or '.m3u8' in target_url:
-            original_content = resp.text
-            base_url = target_url.rsplit('/', 1)[0] + '/'
-
-            def rewrite_line(line):
-                if line.strip().startswith('#') or line.strip() == '':
-                    return line + '\n'
-                absolute_url = urljoin(base_url, line.strip())
-                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
-                return proxied_url + '\n'
-
-            rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
-            return Response(rewritten_content, content_type=content_type)
-
-        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
-    except Exception as e:
-        return f"❌ Error fetching the URL: {e}", 500
 
 @app.route('/logo')
 def logo():
