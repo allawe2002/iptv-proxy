@@ -180,17 +180,13 @@ def proxy():
     if not target_url:
         return "❌ Missing 'url' query parameter", 400
 
-    # Default headers
+    # Use VLC-like User-Agent
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
-        'Referer': 'https://adtv.ae/'
+        'User-Agent': 'VLC/3.0.11 LibVLC/3.0.11',
+        'Referer': target_url,
+        'Origin': target_url,
+        'Connection': 'keep-alive'
     }
-
-    # Special headers for certain domains
-    if "404focusnotfound.com" in target_url or "iptvplatinum.net" in target_url:
-        headers['User-Agent'] = 'VLC/3.0.11 LibVLC/3.0.11'
-        headers['Referer'] = 'http://404focusnotfound.com/'
-        headers['Origin'] = 'http://404focusnotfound.com/'
 
     try:
         resp = requests.get(target_url, headers=headers, stream=True)
@@ -214,6 +210,7 @@ def proxy():
 
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
+
 
 
 @app.route('/logo')
