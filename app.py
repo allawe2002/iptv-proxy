@@ -183,19 +183,16 @@ def proxy():
     if not target_url:
         return "❌ Missing 'url' query parameter", 400
 
-    # Use VLC-like User-Agent
     headers = {
-        'User-Agent': 'VLC/3.0.11 LibVLC/3.0.11',
-        'Referer': target_url,
-        'Origin': target_url,
-        'Connection': 'keep-alive'
+        'User-Agent': 'Mozilla/5.0',
+        'Referer': target_url,  # Dynamic referer, can be customized
     }
 
     try:
         resp = requests.get(target_url, headers=headers, stream=True)
         content_type = resp.headers.get('Content-Type', '')
 
-        if 'application/vnd.apple.mpegurl' in content_type or '.m3u8' in target_url:
+        if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
             original_content = resp.text
             base_url = target_url.rsplit('/', 1)[0] + '/'
 
@@ -207,7 +204,7 @@ def proxy():
                 return proxied_url + '\n'
 
             rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
-            return Response(rewritten_content, content_type=content_type)
+            return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
 
         return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
 
