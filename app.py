@@ -126,7 +126,7 @@ hls_template = '''
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
         <button class="control-btn"
-            onclick="toggleStream('playerTLC', '/proxy/?url=http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8&play_token=72E19255AF0D91DD0AD713012761C715')">
+            onclick="toggleStream('playerTLC', '/proxy/?url=http://404focusnotfound.com:80/play/live.php?mac=00:1B:79:3E:05:F4&stream=925256&extension=m3u8')">
             Play/Stop
         </button>
     </div>
