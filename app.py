@@ -125,8 +125,8 @@ hls_template = '''
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
-       <button class="control-btn" onclick="toggleStream('player8', '/proxy/?url=http://109.236.88.105:8080//live/971509501036/0912532609771/520385.m3u8
-')">
+       <button class="control-btn" onclick="toggleStream('playerX', '/static/playlists/playlist.m3u8')">Play/Stop</button>
+
     Play/Stop
 </button>
 
