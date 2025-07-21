@@ -23,6 +23,46 @@ login_form = '''
 '''
 
 hls_template = '''
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+    function proxyIfHttp(url) {
+        return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+    }
+
+    function setupHLS(video, streamUrl) {
+        if (video.hlsInstance) {
+            video.hlsInstance.destroy();
+        }
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(streamUrl);
+            hls.attachMedia(video);
+            video.hlsInstance = hls;
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = streamUrl;
+        }
+    }
+
+    function toggleStream(playerId, streamUrl) {
+        var video = document.getElementById(playerId);
+        let finalUrl = proxyIfHttp(streamUrl);
+
+        if (video.hlsInstance || !video.paused) {
+            if (video.hlsInstance) {
+                video.hlsInstance.destroy();
+                video.hlsInstance = null;
+            }
+            video.pause();
+            video.src = "";
+        } else {
+            setupHLS(video, finalUrl);
+            video.play();
+        }
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
  ...
