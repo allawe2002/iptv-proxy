@@ -186,6 +186,14 @@ hls_template = '''
             <button class="control-btn" onclick="toggleStream('player10', '/proxy/?url=https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist_b725000.m3u8')">Play/Stop</button>
      </div>
      </div>
+      <div class="channel-container">
+        <img src="/static/logos/manartv.png" alt="Al Manar TV Logo" width="100">
+        <video id="player11" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
+        <div class="channel-info">
+            <h3>⋆`🍌 ⋆ 🍉  🎀  𝒜𝓁 𝑀𝒶𝓃𝒶𝓇 𝒯𝒱  🎀  🍉 ⋆ 🍌 `⋆</h3>
+            <button class="control-btn" onclick="toggleStream('player11', '/proxy/?url=https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
+     </div>
+     </div>
 
     <script>
         function setupHLS(video, streamUrl) {
