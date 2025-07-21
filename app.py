@@ -67,6 +67,10 @@ hls_template = '''
 <html>
  ...
 <head>
+<title>TwinStreamTV</title>
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+
     <title>TwinStreamTV Proxy</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
