@@ -138,7 +138,7 @@ hls_template = '''
         <video id="player5" width="320" height="180" controls poster="/static/logos/almayadeen.png"></video>
        <div class="channel-info">
             <h3>🐖 ⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆ 🐖</h3>
-            <button class="control-btn" onclick="toggleStream('player5', 'http://foxx-tv.xyz:80/play/live.php?mac=00:1A:79:6e:f6:8a&stream=598099&extension=m3u8&play_token=F3B442D03F0DEEACF726111C4491BCA0')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player5', 'http://foxx-tv.xyz:80/play/live.php?mac=00:1A:79:6e:f6:8a&stream=598099&extension=m3u8')">Play/Stop</button>
         </div>
     </div>
 
