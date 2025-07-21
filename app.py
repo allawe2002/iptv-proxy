@@ -128,7 +128,7 @@ hls_template = '''
         <img src="/static/logos/aljazeera.png" alt="Al jazeera Logo" width="100">
         <video id="player4" width="320" height="180" controls poster="/static/logos/aljazeera.png"></video>
         <div class="channel-info">
-            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥𝒜𝒵𝐸𝐸𝑅𝒜 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆ 🍭</h3>
+            <h3>🍭 ⋆ 🍭  🎀  𝒜𝐿 𝒥azeera 𝒩ews  🎀  🍭 ⋆ 🍭</h3>
             <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
     </div>
