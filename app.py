@@ -65,15 +65,11 @@ hls_template = '''
 
 <!DOCTYPE html>
 <html>
- ...
 <head>
 <title>TwinStreamTV</title>
 <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-</head>
-
-    <title>TwinStreamTV Proxy</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
         body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
         .channel-container { display: flex; align-items: center; background: #333; color: #fff; margin: 10px; padding: 10px; border-radius: 8px; }
         .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
