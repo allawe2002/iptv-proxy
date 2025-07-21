@@ -165,13 +165,19 @@ hls_template = '''
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
-       <button class="control-btn" onclick="toggleStream('player8', '/static/playlists/TLC.m3u8')">Play/Stop</button>
-
-    Play/Stop
-</button>
+       <button class="control-btn" onclick="toggleStream('player8', '/static/playlists/TLC.m3u8')">Play/Stop</button>Play/Stop</button>
 
     </div>
 </div>
+
+<div class="channel-container">
+        <img src="/static/logos/TLC.png" alt="DHAFRA Logo" width="100">
+        <video id="player7" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
+        <div class="channel-info">
+            <h3>⋆`  🎀  DHAFRA 𝒯𝒱  🎀  `⋆</h3>
+            <button class="control-btn" onclick="toggleStream('player9', '/proxy/?url=http://5.9.119.146:8883/dhafra/index.m3u8')">Play/Stop</button>
+     </div>
+     </div>
 
     <script>
         function setupHLS(video, streamUrl) {
