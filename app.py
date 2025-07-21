@@ -180,7 +180,7 @@ hls_template = '''
      </div>
      <div class="channel-container">
         <img src="/static/logos/dubaizaman.png" alt="Dubai Zaman Logo" width="100">
-        <video id="player10" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
+        <video id="player10" width="320" height="180" controls poster="/static/logos/dubaizaman.png"></video>
         <div class="channel-info">
             <h3>⋆`🍭 ⋆ 🍌  🎀  𝒟𝓊𝒷𝒶𝒾 𝒵𝒶𝓂𝒶𝓃  🎀  🍌 ⋆ 🍭 `⋆</h3>
             <button class="control-btn" onclick="toggleStream('player10', '/proxy/?url=https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist_b725000.m3u8')">Play/Stop</button>
@@ -188,10 +188,10 @@ hls_template = '''
      </div>
       <div class="channel-container">
         <img src="/static/logos/manartv.png" alt="Al Manar TV Logo" width="100">
-        <video id="player11" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
+        <video id="player11" width="320" height="180" controls poster="/static/logos/manartv.png"></video>
         <div class="channel-info">
             <h3>⋆`🍌 ⋆ 🍉  🎀  𝒜𝓁 𝑀𝒶𝓃𝒶𝓇 𝒯𝒱  🎀  🍉 ⋆ 🍌 `⋆</h3>
-            <button class="control-btn" onclick="toggleStream('player11', '/proxy/?url=https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player11', 'https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
      </div>
      </div>
 
