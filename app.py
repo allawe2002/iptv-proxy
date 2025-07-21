@@ -172,7 +172,7 @@ hls_template = '''
 
 <div class="channel-container">
         <img src="/static/logos/TLC.png" alt="DHAFRA Logo" width="100">
-        <video id="player7" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
+        <video id="player9" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
         <div class="channel-info">
             <h3>⋆`  🎀  DHAFRA 𝒯𝒱  🎀  `⋆</h3>
             <button class="control-btn" onclick="toggleStream('player9', '/proxy/?url=https://rtmp-live-ingest-eu-west-3-universe-dacast-com.akamaized.net/transmuxv1/streams/dbb8ac05-a020-784c-3a95-6ed027941532.m3u8')">Play/Stop</button>
