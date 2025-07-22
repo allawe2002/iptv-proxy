@@ -6,6 +6,45 @@ app = Flask(__name__)
 
 PASSCODE = "372420"
 
+@app.route('/proxy/')
+def proxy():
+    target_url = request.args.get('url')
+    if not target_url:
+        return "❌ Missing 'url' query parameter", 400
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0',
+        'Referer': target_url
+    }
+
+    try:
+        resp = requests.get(target_url, headers=headers, stream=True, timeout=10)
+        content_type = resp.headers.get('Content-Type', '')
+
+        if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
+            original_content = resp.text
+            base_url = target_url.rsplit('/', 1)[0] + '/'
+
+            def rewrite_line(line):
+                if line.strip().startswith('#') or line.strip() == '':
+                    return line + '\n'
+
+                absolute_url = urljoin(base_url, line.strip())
+                if absolute_url.startswith('http://'):
+                    absolute_url = absolute_url.replace('http://', 'https://')
+
+                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
+                return proxied_url + '\n'
+
+            rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
+            return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
+
+        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
+
+    except Exception as e:
+        return f"❌ Error fetching the URL: {e}", 500
+
+
 login_form = '''
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background-color: #1e1e1e; color: white;">
         <img src="/static/logos/TwinStream.png" alt="TwinStreamTV Logo" style="width: 300px; margin-bottom: 20px;">
@@ -21,47 +60,48 @@ login_form = '''
         </form>
     </div>
 '''
-
 hls_template = '''
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
-    function proxyIfHttp(url) {
-        return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+function proxyIfHttp(url) {
+    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+}
+
+function setupHLS(video, streamUrl) {
+    if (video.hlsInstance) {
+        video.hlsInstance.destroy();
     }
 
-    function setupHLS(video, streamUrl) {
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+    }
+}
+
+function toggleStream(playerId, streamUrl) {
+    var video = document.getElementById(playerId);
+    let finalUrl = proxyIfHttp(streamUrl);
+
+    if (video.hlsInstance || !video.paused) {
         if (video.hlsInstance) {
             video.hlsInstance.destroy();
+            video.hlsInstance = null;
         }
-
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(video);
-            video.hlsInstance = hls;
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamUrl;
-        }
+        video.pause();
+        video.src = "";
+    } else {
+        setupHLS(video, finalUrl);
+        video.play();
     }
-
-    function toggleStream(playerId, streamUrl) {
-        var video = document.getElementById(playerId);
-        let finalUrl = proxyIfHttp(streamUrl);
-
-        if (video.hlsInstance || !video.paused) {
-            if (video.hlsInstance) {
-                video.hlsInstance.destroy();
-                video.hlsInstance = null;
-            }
-            video.pause();
-            video.src = "";
-        } else {
-            setupHLS(video, finalUrl);
-            video.play();
-        }
-    }
+}
 </script>
+
+
 
 <!DOCTYPE html>
 <html>
