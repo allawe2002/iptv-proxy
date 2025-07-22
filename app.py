@@ -18,7 +18,7 @@ def proxy():
     }
 
     try:
-        resp = requests.get(target_url, headers=headers, stream=True, timeout=10)
+        resp = requests.get(target_url, headers=headers, stream=True, timeout=10, verify=False)
         content_type = resp.headers.get('Content-Type', '')
 
         if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
@@ -43,6 +43,7 @@ def proxy():
 
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
+
 
 
 login_form = '''
