@@ -25,16 +25,18 @@ def proxy():
             original_content = resp.text
             base_url = target_url.rsplit('/', 1)[0] + '/'
 
-            def rewrite_line(line):
-                if line.strip().startswith('#') or line.strip() == '':
-                    return line + '\n'
+           def rewrite_line(line):
+    if line.strip().startswith('#') or line.strip() == '':
+        return line + '\n'
 
-                absolute_url = urljoin(base_url, line.strip())
-                if absolute_url.startswith('http://'):
-                    absolute_url = absolute_url.replace('http://', 'https://')
+    absolute_url = urljoin(base_url, line.strip())
+    
+    if target_url.startswith('https://') and absolute_url.startswith('http://'):
+        absolute_url = absolute_url.replace('http://', 'https://')
 
-                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
-                return proxied_url + '\n'
+    proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
+    return proxied_url + '\n'
+
 
             rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
             return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
