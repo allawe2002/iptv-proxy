@@ -269,6 +269,17 @@ function toggleStream(playerId, streamUrl) {
 </html>
 '''
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        code = request.form.get('passcode')
+        if code == PASSCODE:
+            return hls_template
+        else:
+            return login_form + '<p style="color:red;">❌ Incorrect Passcode</p>'
+    return login_form
+
+
 @app.route('/logo')
 def logo():
     return send_file('TwinStream_logo.png', mimetype='image/png')
