@@ -247,7 +247,7 @@ def proxy():
 
     headers = {
         'User-Agent': 'Mozilla/5.0',
-        'Referer': target_url,  # Dynamic referer, can be customized
+        'Referer': target_url,
     }
 
     try:
@@ -261,7 +261,12 @@ def proxy():
             def rewrite_line(line):
                 if line.strip().startswith('#') or line.strip() == '':
                     return line + '\n'
+
                 absolute_url = urljoin(base_url, line.strip())
+
+                if absolute_url.startswith('http://'):
+                    absolute_url = absolute_url.replace('http://', 'https://')
+
                 proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
                 return proxied_url + '\n'
 
@@ -272,6 +277,7 @@ def proxy():
 
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
+
 
 
 
