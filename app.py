@@ -206,7 +206,7 @@ function toggleStream(playerId, streamUrl) {
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
-       <button class="control-btn" onclick="toggleStream('player8', '/proxy/?url=http://iptvplatinum.net:80/play/live.php?mac=00:1A:79:2F:6D:12&stream=176906&extension=m3u8&play_token=DA55687E3EE4867EAE7DD4EAB38137C1')">Play/Stop</button>
+       <button class="control-btn" onclick="toggleStream('player8', '/proxy/?url=https://iptvplatinum.net:80/play/live.php?mac=00:1A:79:2F:6D:12&stream=176906&extension=m3u8&play_token=DA55687E3EE4867EAE7DD4EAB38137C1')">Play/Stop</button>
 
     </div>
 </div>
