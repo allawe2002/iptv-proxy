@@ -156,7 +156,7 @@ hls_template = '''
         <video id="player7" width="320" height="180" controls poster="/static/logos/nbn.png"></video>
         <div class="channel-info">
             <h3>⋆`  🎀  𝒩𝐵𝒩 𝒯𝒱  🎀  `⋆</h3>
-            <button class="control-btn" onclick="toggleStream('player7', '/proxy/?url=http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player7', 'http://5.9.119.146:8883/nbn/index.m3u8')">Play/Stop</button>
      </div>
      </div>
 
