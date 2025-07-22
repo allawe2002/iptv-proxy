@@ -25,7 +25,7 @@ def proxy():
             original_content = resp.text
             base_url = target_url.rsplit('/', 1)[0] + '/'
 
-            def rewrite_line(line):
+def rewrite_line(line):
     if line.strip().startswith('#') or line.strip() == '':
         return line + '\n'
 
