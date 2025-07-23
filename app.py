@@ -151,7 +151,7 @@ function toggleStream(playerId, streamUrl) {
 
 <div class="channel-container">
     <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
-    <div id="youtube-container1"></div>
+    <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>▶️ YouTube Channel</h3>
         <button class="control-btn" onclick="toggleYouTube('youtube-container1', 'Y7Ruul8u3E8')">Play/Stop</button>
@@ -172,6 +172,7 @@ function toggleYouTube(containerId, videoId) {
     }
 }
 </script>
+
 
 </body>
 </html>
