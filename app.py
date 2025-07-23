@@ -150,11 +150,10 @@ function toggleStream(playerId, streamUrl) {
     </div>
    <div class="channel-container">
     <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
-    <iframe width="320" height="180" src="https://www.youtube.com/embed/Y7Ruul8u3E8?autoplay=0" 
-            frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>▶️ YouTube Channel</h3>
-        <button class="control-btn" onclick="window.open('/youtube/Y7Ruul8u3E8', '_blank')">Watch on YouTube</button>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container1', 'Y7Ruul8u3E8')">Play/Stop</button>
     </div>
 </div>
 
