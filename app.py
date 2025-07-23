@@ -361,10 +361,10 @@ def home():
 @app.route('/logo')
 def logo():
     return send_file('TwinStream_logo.png', mimetype='image/png')
-@app.route('/youtube/<video_id>')
-def youtube_embed(video_id):
-  embed_url = f"https://www.youtube.com/embed/Y7Ruul8u3E8?autoplay=1"
-
+@app.route('/youtube1')
+def youtube1():
+    video_id = "Y7Ruul8u3E8"
+    embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1"
     return f'''
     <html>
     <head>
@@ -376,6 +376,7 @@ def youtube_embed(video_id):
     </body>
     </html>
     '''
+
 
 # Start the app
 if __name__ == "__main__":
