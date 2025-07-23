@@ -206,7 +206,7 @@ function toggleStream(playerId, streamUrl) {
     <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
-        <h3>⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆</h3>
+        <h3>⋆ 🍉 🎀 𝒯𝐿𝒞 O𝒮𝒩 🎀 🍉 ⋆</h3>
         <button class="control-btn" onclick="toggleStream('player8', 'https://v4.thetvapp.to/hls/TLCEast/tracks-v2a1/mono.m3u8?token=ycQvL8FArNfxOG3WIX8W0w&expires=1753277350&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
 
  </div>
@@ -242,6 +242,14 @@ function toggleStream(playerId, streamUrl) {
         <div class="channel-info">
             <h3>⋆🍬  🎀  𝐻𝒢𝒯𝒱 𝒰𝒮𝒜  🎀  🍬</h3>
             <button class="control-btn" onclick="toggleStream('player12', 'https://v13.thetvapp.to/hls/HGTVEast/tracks-v2a1/mono.m3u8?token=9LmbymoAF5sm_LfX_oW12Q&expires=1753277219&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
+     </div>
+     </div>
+     <div class="channel-container">
+        <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
+        <video id="player13" width="320" height="180" controls poster="/static/logos/cbc.png"></video>
+        <div class="channel-info">
+            <h3>🍌  🎀  𝒞𝐵𝒞 𝒩𝐸𝒲𝒮  🎀  🍌</h3>
+            <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2/854x480.m3u8?ap.debug=0&ap.pt=0&ap.sid=45bc3d75-1614-412d-84fb-cf5b88ebb526&ap.skip_fallback=0&ap.c=default_cohort&ap.ss=b3cb98c25a329e5a0c36abcf9cdc9214')">Play/Stop</button>
      </div>
      </div>
 
