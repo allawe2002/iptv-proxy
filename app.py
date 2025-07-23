@@ -144,7 +144,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/alaraby.png" alt="Alaraby Logo" width="100">
         <video id="player1" width="320" height="180" controls poster="/static/logos/alaraby.png"></video>
         <div class="channel-info">
-            <h3>⋆ 🍭  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  🍭 ⋆</h3>
+            <h3>  🎀  𝒜𝐿 𝒜𝑅𝒜𝐵𝒴 𝒩𝐸𝒲𝒮  🎀  </h3>
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
@@ -170,7 +170,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/aljazeera.png" alt="Al jazeera Logo" width="100">
         <video id="player4" width="320" height="180" controls poster="/static/logos/aljazeera.png"></video>
         <div class="channel-info">
-            <h3>⋆ 🍭  🎀  𝒜𝐿 𝒥azeera 𝒩ews  🎀  🍭 ⋆</h3>
+            <h3>  🎀  𝒜𝐿 𝒥azeera 𝒩ews  🎀  </h3>
             <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
     </div>
@@ -179,7 +179,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/almayadeen.png" alt="Almayadeen Logo" width="100">
         <video id="player5" width="320" height="180" controls poster="/static/logos/almayadeen.png"></video>
        <div class="channel-info">
-            <h3>⋆ 🐭  🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀  🐭 ⋆</h3>
+            <h3>⋆ 🎀  𝒜𝓁 𝑀𝒶𝓎𝒶𝒹𝑒𝑒𝓃  🎀 </h3>
             <button class="control-btn" onclick="toggleStream('player5', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
         </div>
     </div>
@@ -206,7 +206,7 @@ function toggleStream(playerId, streamUrl) {
     <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
-        <h3>⋆ 🍉 🎀 𝒯𝐿𝒞 O𝒮𝒩 🎀 🍉 ⋆</h3>
+        <h3>🎀 𝒯𝐿𝒞 O𝒮𝒩 🎀 </h3>
         <button class="control-btn" onclick="toggleStream('player8', 'https://v4.thetvapp.to/hls/TLCEast/tracks-v2a1/mono.m3u8?token=ycQvL8FArNfxOG3WIX8W0w&expires=1753277350&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
 
  </div>
@@ -216,7 +216,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/dhafra.png" alt="Dhafra Tv Logo" width="100">
         <video id="player9" width="320" height="180" controls poster="/static/logos/dhafra.png"></video>
         <div class="channel-info">
-            <h3>⋆ 🎀  DHAFRA 𝒯𝒱  🎀 ⋆</h3>
+            <h3> 🎀  DHAFRA 𝒯𝒱  🎀 </h3>
             <button class="control-btn" onclick="toggleStream('player9', '/proxy/?url=https://rtmp-live-ingest-eu-west-3-universe-dacast-com.akamaized.net/transmuxv1/streams/dbb8ac05-a020-784c-3a95-6ed027941532.m3u8')">Play/Stop</button>
      </div>
      </div>
@@ -224,7 +224,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/dubaizaman.png" alt="Dubai Zaman Logo" width="100">
         <video id="player10" width="320" height="180" controls poster="/static/logos/dubaizaman.png"></video>
         <div class="channel-info">
-            <h3>⋆🍌  🎀  𝒟𝓊𝒷𝒶𝒾 𝒵𝒶𝓂𝒶𝓃  🎀  🍌  ⋆</h3>
+            <h3> 🎀  𝒟𝓊𝒷𝒶𝒾 𝒵𝒶𝓂𝒶𝓃  🎀 </h3>
             <button class="control-btn" onclick="toggleStream('player10', '/proxy/?url=https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist_b725000.m3u8')">Play/Stop</button>
      </div>
      </div>
@@ -232,7 +232,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/manartv.png" alt="Al Manar TV Logo" width="100">
         <video id="player11" width="320" height="180" controls poster="/static/logos/manartv.png"></video>
         <div class="channel-info">
-            <h3>⋆ 🍉  🎀  𝒜𝓁 𝑀𝒶𝓃𝒶𝓇 𝒯𝒱  🎀  🍉 ⋆</h3>
+            <h3>  🎀  𝒜𝓁 𝑀𝒶𝓃𝒶𝓇 𝒯𝒱  🎀 </h3>
             <button class="control-btn" onclick="toggleStream('player11', 'https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
      </div>
      </div>
@@ -240,7 +240,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/hgtv.png" alt="HGTV Logo" width="100">
         <video id="player12" width="320" height="180" controls poster="/static/logos/hgtv.png"></video>
         <div class="channel-info">
-            <h3>⋆🍬  🎀  𝐻𝒢𝒯𝒱 𝒰𝒮𝒜  🎀  🍬</h3>
+            <h3>  🎀  𝐻𝒢𝒯𝒱 𝒰𝒮𝒜  🎀  </h3>
             <button class="control-btn" onclick="toggleStream('player12', 'https://v13.thetvapp.to/hls/HGTVEast/tracks-v2a1/mono.m3u8?token=9LmbymoAF5sm_LfX_oW12Q&expires=1753277219&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
      </div>
      </div>
@@ -248,7 +248,7 @@ function toggleStream(playerId, streamUrl) {
         <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
         <video id="player13" width="320" height="180" controls poster="/static/logos/cbc.png"></video>
         <div class="channel-info">
-            <h3>🍌  🎀  𝒞𝐵𝒞 𝒩𝐸𝒲𝒮  🎀  🍌</h3>
+            <h3>  🎀  𝒞𝐵𝒞 𝒩𝐸𝒲𝒮  🎀 </h3>
             <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2/854x480.m3u8?ap.debug=0&ap.pt=0&ap.sid=45bc3d75-1614-412d-84fb-cf5b88ebb526&ap.skip_fallback=0&ap.c=default_cohort&ap.ss=b3cb98c25a329e5a0c36abcf9cdc9214')">Play/Stop</button>
      </div>
      </div>
