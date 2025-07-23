@@ -108,31 +108,74 @@ function toggleStream(playerId, streamUrl) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>TwinStreamTV</title>
-<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<style>
+    <title>TwinStreamTV</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
         body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-        .channel-container { display: flex; align-items: center; background: #333; color: #fff; margin: 10px; padding: 10px; border-radius: 8px; }
-        .channel-container video { margin-right: 15px; border: 2px solid #007BFF; }
-        .channel-info { display: flex; flex-direction: column; }
-        .channel-info h3 { margin: 0 0 10px 0; }
+        .channel-container {
+            display: flex;
+            align-items: center;
+            background: #333;
+            color: #fff;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .channel-container iframe, .channel-container video {
+            margin-right: 15px;
+            border: 2px solid #007BFF;
+        }
+        .channel-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .channel-info h3 {
+            margin: 0 0 10px 0;
+        }
         .control-btn {
-    margin-top: 5px;
-    margin-right: 5px;
-    padding: 10px 20px;  /* Adjusts vertical & horizontal size */
-    font-size: 16px;     /* Increases text size */
-    height: 50px;        /* Directly controls button height */
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+            margin-top: 5px;
+            margin-right: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 50px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+
+<div class="channel-container">
+    <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
+    <div id="youtube-container1"></div>
+    <div class="channel-info">
+        <h3>▶️ YouTube Channel</h3>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container1', 'Y7Ruul8u3E8')">Play/Stop</button>
+    </div>
+</div>
+
+<script>
+function toggleYouTube(containerId, videoId) {
+    const container = document.getElementById(containerId);
+    if (container.innerHTML.trim() === "") {
+        container.innerHTML = `
+            <iframe width="320" height="180"
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+            </iframe>`;
+    } else {
+        container.innerHTML = "";
+    }
+}
+</script>
+
+</body>
+</html>
+
     
 
     <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
