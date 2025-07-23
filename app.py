@@ -148,6 +148,15 @@ function toggleStream(playerId, streamUrl) {
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
+   <div class="channel-container">
+    <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
+    <iframe width="320" height="180" src="https://www.youtube.com/embed/Y7Ruul8u3E8?autoplay=0" 
+            frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    <div class="channel-info">
+        <h3>▶️ YouTube Channel</h3>
+        <button class="control-btn" onclick="window.open('/youtube/Y7Ruul8u3E8', '_blank')">Watch on YouTube</button>
+    </div>
+</div>
 
     <div class="channel-container">
         <img src="/static/logos/aljadeed.png" alt="Al jadeed Logo" width="100">
@@ -310,7 +319,22 @@ def home():
 @app.route('/logo')
 def logo():
     return send_file('TwinStream_logo.png', mimetype='image/png')
+@app.route('/youtube/<video_id>')
+def youtube_embed(video_id): video_id = "Y7Ruul8u3E8"
+    embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1"
+    return f'''
+    <html>
+    <head>
+        <title>YouTube Stream</title>
+    </head>
+    <body style="margin:0;padding:0;">
+        <iframe width="100%" height="100%" src="{embed_url}" 
+                frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    </body>
+    </html>
+    '''
 
-
+# Start the app
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
