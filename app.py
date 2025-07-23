@@ -252,9 +252,17 @@ function toggleStream(playerId, streamUrl) {
             <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2/854x480.m3u8?ap.debug=0&ap.pt=0&ap.sid=45bc3d75-1614-412d-84fb-cf5b88ebb526&ap.skip_fallback=0&ap.c=default_cohort&ap.ss=b3cb98c25a329e5a0c36abcf9cdc9214')">Play/Stop</button>
      </div>
      </div>
+    <div class="channel-container">
+        <img src="/static/logos/cnn.png" alt="CNN USA Logo" width="100">
+        <video id="player14" width="320" height="180" controls poster="/static/logos/cnn.png"></video>
+        <div class="channel-info">
+            <h3>  🎀  𝒞𝒩𝒩  🎀 </h3>
+            <button class="control-btn" onclick="toggleStream('player14', 'https://fl3.moveonjoy.com/CNN/tracks-v1a1/mono.ts.m3u8')">Play/Stop</button>
+         </div> 
+          </div>
 
-     
-    <script>
+
+      <script>
         function setupHLS(video, streamUrl) {
             if (video.hlsInstance) {
                 video.hlsInstance.destroy();
