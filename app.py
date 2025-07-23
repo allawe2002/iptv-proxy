@@ -361,21 +361,23 @@ def home():
 @app.route('/logo')
 def logo():
     return send_file('TwinStream_logo.png', mimetype='image/png')
-@app.route('/youtube1')
-def youtube1():
-    video_id = "Y7Ruul8u3E8"
-    embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1"
-    return f'''
-    <html>
-    <head>
-        <title>YouTube Stream</title>
-    </head>
-    <body style="margin:0;padding:0;">
-        <iframe width="100%" height="100%" src="{embed_url}" 
-                frameborder="0" allowfullscreen allow="autoplay"></iframe>
-    </body>
-    </html>
-    '''
+
+@app.route('/youtube/<code>')
+def youtube_embed(code):
+    embed_url = f"https://www.youtube.com/embed/{code}?autoplay=1"
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Stream</title>
+</head>
+<body style="margin:0;padding:0;">
+    <iframe width="100%" height="100%" src="{embed_url}"
+            frameborder="0" allowfullscreen allow="autoplay"></iframe>
+</body>
+</html>"""
+
+
+
 
 
 # Start the app
