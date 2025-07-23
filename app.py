@@ -363,7 +363,8 @@ def logo():
     return send_file('TwinStream_logo.png', mimetype='image/png')
 @app.route('/youtube/<video_id>')
 def youtube_embed(video_id):
-    embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=1"
+  embed_url = f"https://www.youtube.com/embed/Y7Ruul8u3E8?autoplay=1"
+
     return f'''
     <html>
     <head>
