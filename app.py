@@ -151,7 +151,7 @@ function toggleStream(playerId, streamUrl) {
 
 <div class="channel-container">
     <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
-    <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
+    <div id="youtube-container1" style="width: 320px; height: 180px; background-color: black;"></div>
     <div class="channel-info">
         <h3>▶️ YouTube Channel</h3>
         <button class="control-btn" onclick="toggleYouTube('youtube-container1', 'Y7Ruul8u3E8')">Play/Stop</button>
@@ -161,11 +161,18 @@ function toggleStream(playerId, streamUrl) {
 <script>
 function toggleYouTube(containerId, videoId) {
     const container = document.getElementById(containerId);
+    if (!container) {
+        console.error("Container not found:", containerId);
+        return;
+    }
+
     if (container.innerHTML.trim() === "") {
         container.innerHTML = `
             <iframe width="320" height="180"
                     src="https://www.youtube.com/embed/${videoId}?autoplay=1"
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
             </iframe>`;
     } else {
         container.innerHTML = "";
