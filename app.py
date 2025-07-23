@@ -149,7 +149,7 @@ function toggleStream(playerId, streamUrl) {
         </div>
     </div>
    <div class="channel-container">
-    <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
+    <img src="/static/logos/cbc.png" alt="YouTube Logo" width="100">
     <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>▶️ YouTube Channel</h3>
