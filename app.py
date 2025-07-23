@@ -207,7 +207,7 @@ function toggleStream(playerId, streamUrl) {
     <video id="player8" width="320" height="180" controls poster="/static/logos/tlc.png"></video>
     <div class="channel-info">
         <h3>🍑 ⋆ 🍉 🎀 𝒯𝐿𝒞 🍩𝒮𝒩 🎀 🍉 ⋆ 🍑</h3>
-        <button class="control-btn" onclick="toggleStream('player8', 'https://pastebin.com/raw/ENaVz699')">Play/Stop</button>
+        <button class="control-btn" onclick="toggleStream('player8', 'https://v4.thetvapp.to/hls/TLCEast/tracks-v2a1/mono.m3u8?token=ycQvL8FArNfxOG3WIX8W0w&expires=1753277350&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
 
  </div>
 </div>
