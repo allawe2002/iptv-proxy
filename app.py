@@ -236,7 +236,16 @@ function toggleStream(playerId, streamUrl) {
             <button class="control-btn" onclick="toggleStream('player11', 'https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
      </div>
      </div>
+     <div class="channel-container">
+        <img src="/static/logos/hgtv.png" alt="HGTV Logo" width="100">
+        <video id="player12" width="320" height="180" controls poster="/static/logos/manartv.png"></video>
+        <div class="channel-info">
+            <h3>⋆`✴  🎀  𝐻𝒢𝒯𝒱  🎀  ✴`</h3>
+            <button class="control-btn" onclick="toggleStream('player12', 'https://v13.thetvapp.to/hls/HGTVEast/tracks-v2a1/mono.m3u8?token=9LmbymoAF5sm_LfX_oW12Q&expires=1753277219&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
+     </div>
+     </div>
 
+     
     <script>
         function setupHLS(video, streamUrl) {
             if (video.hlsInstance) {
