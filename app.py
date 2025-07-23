@@ -249,7 +249,7 @@ function toggleStream(playerId, streamUrl) {
         <video id="player13" width="320" height="180" controls poster="/static/logos/cbc.png"></video>
         <div class="channel-info">
             <h3>  🎀  𝒞𝐵𝒞 𝒩𝐸𝒲𝒮  🎀 </h3>
-            <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2/854x480.m3u8?ap.debug=0&ap.pt=0&ap.sid=45bc3d75-1614-412d-84fb-cf5b88ebb526&ap.skip_fallback=0&ap.c=default_cohort&ap.ss=b3cb98c25a329e5a0c36abcf9cdc9214')">Play/Stop</button>
+            <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2.m3u8')">Play/Stop</button>
      </div>
      </div>
     <div class="channel-container">
