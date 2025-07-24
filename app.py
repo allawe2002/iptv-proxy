@@ -258,7 +258,9 @@ window.onload = function () {
 
   
 
+html_welcome_banner = '''
 <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
+'''
 
 <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
      style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
@@ -423,35 +425,123 @@ window.onload = function () {
                 video.play();
             }
         }
-    hls_template = '''
+hls_template = f'''
 <!DOCTYPE html>
 <html>
 <head>
-    ...
+    <title>TwinStreamTV</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {{ font-family: Arial, sans-serif; background-color: #f0f0f0; }}
+        .main-title {{
+            text-align: center;
+            font-size: 2em;
+            color: #007BFF;
+            margin: 20px;
+        }}
+        .channel-container {{
+            display: flex;
+            align-items: center;
+            background: #333;
+            color: #fff;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }}
+        .channel-container iframe, .channel-container video {{
+            margin-right: 15px;
+            border: 2px solid #007BFF;
+        }}
+        .channel-info {{
+            display: flex;
+            flex-direction: column;
+        }}
+        .channel-info h3 {{
+            margin: 0 0 10px 0;
+        }}
+        .control-btn {{
+            margin-top: 5px;
+            margin-right: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            height: 50px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }}
+    </style>
 </head>
 <body>
-    ...  <!-- Your channel HTML blocks go here -->
 
-    <!-- CBC External Open Script -->
+    {html_welcome_banner}
+
     <script>
-    async function openCBC() {
-        try {
+    function proxyIfHttp(url) {{
+        return url.startsWith('http://') ? `/proxy/?url=${{encodeURIComponent(url)}}` : url;
+    }}
+
+    function setupHLS(video, streamUrl) {{
+        if (video.hlsInstance) {{
+            video.hlsInstance.destroy();
+        }}
+        if (Hls.isSupported()) {{
+            var hls = new Hls();
+            hls.loadSource(streamUrl);
+            hls.attachMedia(video);
+            video.hlsInstance = hls;
+        }} else if (video.canPlayType('application/vnd.apple.mpegurl')) {{
+            video.src = streamUrl;
+        }}
+    }}
+
+    function toggleStream(playerId, streamUrl) {{
+        var video = document.getElementById(playerId);
+        let finalUrl = proxyIfHttp(streamUrl);
+        if (video.hlsInstance || !video.paused) {{
+            if (video.hlsInstance) {{
+                video.hlsInstance.destroy();
+                video.hlsInstance = null;
+            }}
+            video.pause();
+            video.src = "";
+        }} else {{
+            setupHLS(video, finalUrl);
+            video.play();
+        }}
+    }}
+
+    // CBC Embed Logic
+    async function loadCBC() {{
+        try {{
             const response = await fetch("/api/youtube/cbc-id");
             const data = await response.json();
-            if (data.iframe_url) {
-                window.open(data.iframe_url, "_blank");
-            } else {
-                alert("❌ CBC stream link not available.");
-            }
-        } catch (err) {
-            console.error("CBC Open Error:", err);
-            alert("❌ Failed to load CBC stream.");
-        }
-    }
+            if (data.iframe_url) {{
+                document.getElementById("cbc-iframe").src = data.iframe_url;
+            }} else {{
+                document.getElementById("cbc-iframe").src = "";
+            }}
+        }} catch (e) {{
+            console.error("CBC Load Error:", e);
+        }}
+    }}
+
+    function refreshCBC() {{
+        loadCBC();
+    }}
+
+    // Load CBC iframe on page load
+    window.onload = function() {{
+        loadCBC();
+    }};
     </script>
+
 </body>
 </html>
 '''
+
 
 
 @app.route('/', methods=['GET', 'POST'])
