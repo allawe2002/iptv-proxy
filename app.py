@@ -176,6 +176,26 @@ window.onload = function () {
     loadCBC();
 };
 </script>
+    async function getCBCUrl() {
+        try {
+            const res = await fetch("/api/youtube/cbc-id");
+            const data = await res.json();
+            return data.iframe_url;
+        } catch (e) {
+            console.error("❌ Failed to load CBC URL", e);
+            return null;
+        }
+    }
+
+    async function openCBC() {
+        const url = await getCBCUrl();
+        if (url) {
+            window.open(url, "_blank");
+        } else {
+            alert("CBC stream currently unavailable.");
+        }
+    }
+</script>
 
 <body>
 
@@ -278,10 +298,9 @@ function toggleYouTube(containerId, videoId) {
    
 <div class="channel-container"> 
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
-    <iframe id="cbc-iframe" width="320" height="180" frameborder="0" allowfullscreen allow="autoplay"></iframe>
     <div class="channel-info">
-        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒)</h3>
-        <button class="control-btn" onclick="refreshCBC()">🔁 Reload</button>
+        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (External)</h3>
+        <button class="control-btn" onclick="openCBC()">🔁 Open in New Tab</button>
     </div>
 </div>
 
