@@ -1,43 +1,49 @@
-from flask import Flask, request, Response, jsonify, send_from_directory
+from flask import Flask, request, Response, send_file
 import requests
-import os
+from urllib.parse import urljoin, urlencode
 
-app = Flask(__name__, static_folder="static", static_url_path="/static")
+app = Flask(__name__)
 
-@app.route('/api/youtube/cbc-id')
-def get_cbc_live_id():
-    current_live_id = "W44Vmriu7to"  # Replace with latest ID as needed
-    return jsonify({"video_id": current_live_id})
-    
+PASSCODE = "372420"
+
 @app.route('/proxy/')
 def proxy():
     target_url = request.args.get('url')
     if not target_url:
         return "❌ Missing 'url' query parameter", 400
 
+    headers = {
+        'User-Agent': 'Mozilla/5.0',
+        'Referer': target_url
+    }
+
     try:
-        headers = {
-            "User-Agent": request.headers.get("User-Agent", "TwinStreamProxy/1.0")
-        }
-        response = requests.get(target_url, headers=headers, stream=True, timeout=10)
+        resp = requests.get(target_url, headers=headers, stream=True, timeout=10)
+        content_type = resp.headers.get('Content-Type', '')
 
-        # Remove problematic headers
-        excluded_headers = ["content-encoding", "content-length", "transfer-encoding", "connection"]
-        filtered_headers = [(k, v) for k, v in response.raw.headers.items()
-                            if k.lower() not in excluded_headers]
+        if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
+            original_content = resp.text
+            base_url = target_url.rsplit('/', 1)[0] + '/'
 
-        return Response(response.content, status=response.status_code, headers=filtered_headers)
+            def rewrite_line(line):
+                if line.strip().startswith('#') or line.strip() == '':
+                    return line + '\n'
+
+                absolute_url = urljoin(base_url, line.strip())
+
+                if target_url.startswith('https://') and absolute_url.startswith('http://') and 'iptvplatinum.net' not in absolute_url:
+                    absolute_url = absolute_url.replace('http://', 'https://')
+
+                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
+                return proxied_url + '\n'
+
+            rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
+            return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
+
+        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
+
     except Exception as e:
-        return f"❌ Error fetching URL: {e}", 500
-
-@app.route('/')
-def home():
-    return send_from_directory('.', 'index.html')  # assuming index.html is in same folder as app.py
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
-
+        return f"❌ Error fetching the URL: {e}", 500
 
 
 
@@ -186,50 +192,13 @@ function toggleYouTube(containerId, videoId) {
     </div>
    
 <div class="channel-container">
-  <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
-  <div id="youtube-container-cbc" style="width: 500px; height: 380px; background-color: #000;"></div>
-  <div class="channel-info">
-    <h3>📺 CBC News (YouTube Live)</h3>
-    <button class="control-btn" onclick="toggleCBCStream()">Play/Stop</button>
-  </div>
+    <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
+    <div id="youtube-container-cbc" style="width: 320px; height: 180px; background-color: #000;"></div>
+    <div class="channel-info">
+        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒) </h3>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'W44Vmriu7to')">Play/Stop</button>
+    </div>
 </div>
-
-<script>
-let currentCBCVideoId = null;
-let cbcLoaded = false;
-
-async function toggleCBCStream() {
-  const container = document.getElementById("youtube-container-cbc");
-
-  if (!cbcLoaded) {
-    try {
-      const response = await fetch("/api/youtube/cbc-id");
-      const data = await response.json();
-      currentCBCVideoId = data.video_id;
-
-      if (!currentCBCVideoId) {
-        container.innerHTML = "<p style='color:white;'>No live stream available.</p>";
-        return;
-      }
-
-      container.innerHTML = `
-        <iframe width="500" height="380"
-                src="https://www.youtube.com/embed/${currentCBCVideoId}?autoplay=1"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>`;
-      cbcLoaded = true;
-    } catch (err) {
-      console.error("Error loading CBC live video ID:", err);
-      container.innerHTML = "<p style='color:white;'>Error loading stream.</p>";
-    }
-  } else {
-    container.innerHTML = "";
-    cbcLoaded = false;
-  }
-}
-</script>
 
     <div class="channel-container">
         <img src="/static/logos/aljadeed.png" alt="Al jadeed Logo" width="100">
