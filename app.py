@@ -203,6 +203,7 @@ function toggleYouTube(containerId, videoId) {
     </iframe>
     <div class="channel-info">
         <h3>📺 CBC News (YouTube)</h3>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'W44Vmriu7to')">Play/Stop</button>
     </div>
 </div>
 
