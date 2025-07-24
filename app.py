@@ -195,7 +195,7 @@ function toggleYouTube(containerId, videoId) {
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
     <div id="youtube-container-cbc" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
-        <h3>📺 CBC News (YouTube)</h3>
+        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒) </h3>
         <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'W44Vmriu7to')">Play/Stop</button>
     </div>
 </div>
