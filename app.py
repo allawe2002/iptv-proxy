@@ -1,34 +1,24 @@
-from flask import Flask, request, Response, send_file, jsonify
+from flask import Flask, jsonify, request, Response
 import requests
 from urllib.parse import urljoin, urlencode
-import re
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 PASSCODE = "372420"
 
-# ===============================
-# ✅ CBC YouTube Live ID Auto-Fetch Route
-# ===============================
+# =======================================
+# ✅ Return iframe URL for CBC from FreeInterTV
+# =======================================
 @app.route('/api/youtube/cbc-id')
-def get_cbc_id_from_freeintertv():
+def get_cbc_iframe_link():
     try:
-        url = "http://www.freeintertv.com/view/id-672/Canada-News-0-1"
-        headers = {"User-Agent": "Mozilla/5.0"}
-        response = requests.get(url, headers=headers, timeout=10)
-
-        match = re.search(r'youtube\.com/embed/([a-zA-Z0-9_-]{11})', response.text)
-        if match:
-            video_id = match.group(1)
-            return jsonify({"video_id": video_id})
-        else:
-            return jsonify({"error": "YouTube video ID not found on FreeInterTV"}), 404
+        iframe_url = "http://www.freeintertv.com/modules/View/screen.php?nametv=CBC+Toronto+%28Canada%29&idtv=672&TVSESS=k0jdsf45sal83j3dpupfl09br1"
+        return jsonify({"iframe_url": iframe_url})
     except Exception as e:
-        return jsonify({"error": f"Error fetching FreeInterTV page: {str(e)}"}), 500
+        return jsonify({"error": f"Could not generate CBC iframe URL: {str(e)}"}), 500
 
-# ===============================
-# ✅ Proxy Route for M3U8/TS
-# ===============================
+# =======================================
+# ✅ M3U8 Proxy Handler
+# =======================================
 @app.route('/proxy/')
 def proxy():
     target_url = request.args.get('url')
@@ -68,12 +58,13 @@ def proxy():
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
 
-# ===============================
-# ✅ Home route for test
-# ===============================
+# =======================================
+# ✅ Simple Health Check
+# =======================================
 @app.route('/')
 def index():
-    return 'TwinStreamTV Backend is Running ✅'
+    return '✅ TwinStreamTV Flask Backend is Running'
+
 
 
 
