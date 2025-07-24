@@ -193,14 +193,7 @@ function toggleYouTube(containerId, videoId) {
    
 <div class="channel-container">
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
-    <iframe width="320" height="180" 
-            src="https://www.youtube.com/embed/W44Vmriu7to" 
-            title="Measles cases in Alberta surpass 1,300" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-    </iframe>
+    <div id="youtube-container-cbc" style="width: 500px; height: 380px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>📺 CBC News (YouTube)</h3>
         <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'W44Vmriu7to')">Play/Stop</button>
