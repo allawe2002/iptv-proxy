@@ -151,6 +151,32 @@ hls_template = '''
         }
     </style>
 </head>
+<script>
+async function loadCBC() {
+    try {
+        const response = await fetch("/api/youtube/cbc-id");
+        const data = await response.json();
+        console.log("CBC iframe_url:", data.iframe_url);  // 🔍 Debug line
+        if (data.iframe_url) {
+            document.getElementById("cbc-iframe").src = data.iframe_url;
+        } else {
+            document.getElementById("cbc-iframe").src = "";
+        }
+    } catch (e) {
+        console.error("CBC Load Error:", e);
+    }
+}
+
+function refreshCBC() {
+    loadCBC();
+}
+
+// Load on page start
+window.onload = function () {
+    loadCBC();
+};
+</script>
+
 <body>
 
 <script>
