@@ -151,52 +151,6 @@ hls_template = '''
         }
     </style>
 </head>
-<script>
-async function loadCBC() {
-    try {
-        const response = await fetch("/api/youtube/cbc-id");
-        const data = await response.json();
-        console.log("CBC iframe_url:", data.iframe_url);  // 🔍 Debug line
-        if (data.iframe_url) {
-            document.getElementById("cbc-iframe").src = data.iframe_url;
-        } else {
-            document.getElementById("cbc-iframe").src = "";
-        }
-    } catch (e) {
-        console.error("CBC Load Error:", e);
-    }
-}
-
-function refreshCBC() {
-    loadCBC();
-}
-
-// Load on page start
-window.onload = function () {
-    loadCBC();
-};
-</script>
-    async function getCBCUrl() {
-        try {
-            const res = await fetch("/api/youtube/cbc-id");
-            const data = await res.json();
-            return data.iframe_url;
-        } catch (e) {
-            console.error("❌ Failed to load CBC URL", e);
-            return null;
-        }
-    }
-
-    async function openCBC() {
-        const url = await getCBCUrl();
-        if (url) {
-            window.open(url, "_blank");
-        } else {
-            alert("CBC stream currently unavailable.");
-        }
-    }
-</script>
-
 <body>
 
 <script>
@@ -234,30 +188,6 @@ function toggleStream(playerId, streamUrl) {
     }
 }
 
-// CBC Embed Logic
-async function loadCBC() {
-    try {
-        const response = await fetch("/api/youtube/cbc-id");
-        const data = await response.json();
-        if (data.iframe_url) {
-            document.getElementById("cbc-iframe").src = data.iframe_url;
-        } else {
-            document.getElementById("cbc-iframe").src = "";
-        }
-    } catch (e) {
-        console.error("CBC Load Error:", e);
-    }
-}
-
-// Load CBC iframe on page load
-window.onload = function() {
-    loadCBC();
-};
-
-function refreshCBC() {
-    loadCBC();
-}
-
 function toggleYouTube(containerId, videoId) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -277,7 +207,53 @@ function toggleYouTube(containerId, videoId) {
         container.innerHTML = "";
     }
 }
+
+// CBC dynamic iframe handling
+async function loadCBC() {
+    try {
+        const response = await fetch("/api/youtube/cbc-id");
+        const data = await response.json();
+        if (data.iframe_url) {
+            document.getElementById("cbc-iframe").src = data.iframe_url;
+        } else {
+            document.getElementById("cbc-iframe").src = "";
+        }
+    } catch (e) {
+        console.error("CBC Load Error:", e);
+    }
+}
+
+async function getCBCUrl() {
+    try {
+        const res = await fetch("/api/youtube/cbc-id");
+        const data = await res.json();
+        return data.iframe_url;
+    } catch (e) {
+        console.error("❌ Failed to load CBC URL", e);
+        return null;
+    }
+}
+
+async function openCBC() {
+    const url = await getCBCUrl();
+    if (url) {
+        window.open(url, "_blank");
+    } else {
+        alert("CBC stream currently unavailable.");
+    }
+}
+
+function refreshCBC() {
+    loadCBC();
+}
+
+// Load CBC iframe when page loads
+window.onload = function () {
+    loadCBC();
+};
 </script>
+'''
+
 
 
   
