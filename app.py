@@ -4,13 +4,11 @@ import os
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 
-# ▶️ CBC YouTube live video ID (can be updated dynamically later)
 @app.route('/api/youtube/cbc-id')
 def get_cbc_live_id():
     current_live_id = "W44Vmriu7to"  # Replace with latest ID as needed
     return jsonify({"video_id": current_live_id})
-
-# 🔁 Stream proxy endpoint
+    
 @app.route('/proxy/')
 def proxy():
     target_url = request.args.get('url')
@@ -32,12 +30,10 @@ def proxy():
     except Exception as e:
         return f"❌ Error fetching URL: {e}", 500
 
-# 🏠 Serve the main TwinStreamTV homepage (index.html)
 @app.route('/')
 def home():
     return send_from_directory('.', 'index.html')  # assuming index.html is in same folder as app.py
 
-# 🚀 Start the server
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
 
