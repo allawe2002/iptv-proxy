@@ -149,15 +149,6 @@ function toggleStream(playerId, streamUrl) {
 </head>
 <body>
 
-<!-- ✅ YouTube Channel Block -->
-<div class="channel-container">
-    <img src="/static/logos/youtube.png" alt="YouTube Logo" width="100">
-    <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
-    <div class="channel-info">
-        <h3>▶️ YouTube Channel</h3>
-        <button class="control-btn" onclick="toggleYouTube('youtube-container1', 'Y7Ruul8u3E8')">Play/Stop</button>
-    </div>
-</div>
 
 <script>
 function toggleYouTube(containerId, videoId) {
@@ -186,9 +177,9 @@ function toggleYouTube(containerId, videoId) {
 
     
 
-    <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
+<h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
 
-     <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
+<img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
      style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
 
 <div class="channel-container">
@@ -199,8 +190,9 @@ function toggleYouTube(containerId, videoId) {
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
-   <div class="channel-container">
-    <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
+   
+<div class="channel-container">
+    <img src="/static/logos/youtube.png" alt="CBC NEWS Logo" width="100">
     <div id="youtube-container1" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>▶️ YouTube Channel</h3>
