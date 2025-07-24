@@ -1,9 +1,10 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify, send_from_directory
 import requests
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="/static")
 
-# ▶️ CBC YouTube live video ID (update manually if needed)
+# ▶️ CBC YouTube live video ID (can be updated dynamically later)
 @app.route('/api/youtube/cbc-id')
 def get_cbc_live_id():
     current_live_id = "W44Vmriu7to"  # Replace with latest ID as needed
@@ -22,7 +23,7 @@ def proxy():
         }
         response = requests.get(target_url, headers=headers, stream=True, timeout=10)
 
-        # Remove headers that may cause issues
+        # Remove problematic headers
         excluded_headers = ["content-encoding", "content-length", "transfer-encoding", "connection"]
         filtered_headers = [(k, v) for k, v in response.raw.headers.items()
                             if k.lower() not in excluded_headers]
@@ -31,9 +32,15 @@ def proxy():
     except Exception as e:
         return f"❌ Error fetching URL: {e}", 500
 
+# 🏠 Serve the main TwinStreamTV homepage (index.html)
+@app.route('/')
+def home():
+    return send_from_directory('.', 'index.html')  # assuming index.html is in same folder as app.py
+
 # 🚀 Start the server
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 
 
