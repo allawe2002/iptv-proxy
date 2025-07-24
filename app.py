@@ -447,10 +447,36 @@ function toggleYouTube(containerId, videoId) {
                 video.play();
             }
         }
+    hls_template = '''
+<!DOCTYPE html>
+<html>
+<head>
+    ...
+</head>
+<body>
+    ...  <!-- Your channel HTML blocks go here -->
+
+    <!-- CBC External Open Script -->
+    <script>
+    async function openCBC() {
+        try {
+            const response = await fetch("/api/youtube/cbc-id");
+            const data = await response.json();
+            if (data.iframe_url) {
+                window.open(data.iframe_url, "_blank");
+            } else {
+                alert("❌ CBC stream link not available.");
+            }
+        } catch (err) {
+            console.error("CBC Open Error:", err);
+            alert("❌ Failed to load CBC stream.");
+        }
+    }
     </script>
 </body>
 </html>
 '''
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
