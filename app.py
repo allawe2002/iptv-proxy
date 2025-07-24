@@ -53,11 +53,6 @@ def get_cbc_iframe_link():
         return jsonify({"error": f"Could not generate CBC iframe URL: {str(e)}"}), 500
 
 
-# =======================================
-# ✅ M3U8 Proxy Handler
-# =======================================
-@app.route('/proxy/')
-def proxy():
     target_url = request.args.get('url')
     if not target_url:
         return "❌ Missing 'url' query parameter", 400
