@@ -1,13 +1,50 @@
-from flask import Flask, jsonify, request, Response
+from flask import Flask, request, Response, send_file, jsonify, render_template_string
 import requests
 from urllib.parse import urljoin, urlencode
 
 app = Flask(__name__)
+
 PASSCODE = "372420"
 
-# =======================================
-# ✅ Return iframe URL for CBC from FreeInterTV
-# =======================================
+# ==================== Proxy Route ===================== #
+@app.route('/proxy/')
+def proxy():
+    target_url = request.args.get('url')
+    if not target_url:
+        return "❌ Missing 'url' query parameter", 400
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0',
+        'Referer': target_url
+    }
+
+    try:
+        resp = requests.get(target_url, headers=headers, stream=True, timeout=10)
+        content_type = resp.headers.get('Content-Type', '')
+
+        if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
+            original_content = resp.text
+            base_url = target_url.rsplit('/', 1)[0] + '/'
+
+            def rewrite_line(line):
+                if line.strip().startswith('#') or line.strip() == '':
+                    return line + '\n'
+                absolute_url = urljoin(base_url, line.strip())
+                if target_url.startswith('https://') and absolute_url.startswith('http://') and 'iptvplatinum.net' not in absolute_url:
+                    absolute_url = absolute_url.replace('http://', 'https://')
+                proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
+                return proxied_url + '\n'
+
+            rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
+            return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
+
+        return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
+
+    except Exception as e:
+        return f"❌ Error fetching the URL: {e}", 500
+
+
+# ==================== CBC iframe API ===================== #
 @app.route('/api/youtube/cbc-id')
 def get_cbc_iframe_link():
     try:
