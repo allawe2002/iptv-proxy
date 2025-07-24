@@ -1,11 +1,34 @@
-from flask import Flask, request, Response, send_file
+from flask import Flask, request, Response, send_file, jsonify
 import requests
 from urllib.parse import urljoin, urlencode
+import re
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
-
 PASSCODE = "372420"
 
+# ===============================
+# ✅ CBC YouTube Live ID Auto-Fetch Route
+# ===============================
+@app.route('/api/youtube/cbc-id')
+def get_cbc_live_id():
+    try:
+        url = "https://www.youtube.com/@CBCNews/videos"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        response = requests.get(url, headers=headers, timeout=10)
+
+        match = re.search(r'"videoId":"(.*?)","isLive":true', response.text)
+        if match:
+            video_id = match.group(1)
+            return jsonify({"video_id": video_id})
+        else:
+            return jsonify({"error": "No live video found"}), 404
+    except Exception as e:
+        return jsonify({"error": f"Failed to fetch live video ID: {str(e)}"}), 500
+
+# ===============================
+# ✅ Proxy Route for M3U8/TS
+# ===============================
 @app.route('/proxy/')
 def proxy():
     target_url = request.args.get('url')
@@ -44,6 +67,14 @@ def proxy():
 
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
+
+# ===============================
+# ✅ Home route for test
+# ===============================
+@app.route('/')
+def index():
+    return 'TwinStreamTV Backend is Running ✅'
+
 
 
 
