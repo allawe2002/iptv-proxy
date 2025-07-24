@@ -58,14 +58,6 @@ def proxy():
     except Exception as e:
         return f"❌ Error fetching the URL: {e}", 500
 
-# =======================================
-# ✅ Simple Health Check
-# =======================================
-@app.route('/')
-def index():
-    return '✅ TwinStreamTV Flask Backend is Running'
-
-
 
 
 
