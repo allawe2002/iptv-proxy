@@ -110,7 +110,6 @@ login_form = '''
 '''
 hls_template = '''
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 <script>
 function proxyIfHttp(url) {
     return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
@@ -147,7 +146,33 @@ function toggleStream(playerId, streamUrl) {
         video.play();
     }
 }
+
+// CBC Embed Logic
+async function loadCBC() {
+    try {
+        const response = await fetch("/api/youtube/cbc-id");
+        const data = await response.json();
+        if (data.iframe_url) {
+            document.getElementById("cbc-iframe").src = data.iframe_url;
+        } else {
+            document.getElementById("cbc-iframe").src = "";
+        }
+    } catch (e) {
+        console.error("CBC Load Error:", e);
+    }
+}
+
+// Load CBC iframe on page load
+window.onload = function() {
+    loadCBC();
+};
+
+function refreshCBC() {
+    loadCBC();
+}
 </script>
+'''
+
 
 
 
