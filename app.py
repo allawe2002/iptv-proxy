@@ -3,7 +3,6 @@ import requests
 from urllib.parse import urljoin, urlencode
 
 app = Flask(__name__)
-
 PASSCODE = "372420"
 
 # ==================== Proxy Route ===================== #
@@ -52,6 +51,7 @@ def get_cbc_iframe_link():
         return jsonify({"iframe_url": iframe_url})
     except Exception as e:
         return jsonify({"error": f"Could not generate CBC iframe URL: {str(e)}"}), 500
+
 
 # =======================================
 # ✅ M3U8 Proxy Handler
