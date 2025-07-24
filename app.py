@@ -237,14 +237,15 @@ function toggleYouTube(containerId, videoId) {
         </div>
     </div>
    
-<div class="channel-container">
+<div class="channel-container"> 
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
-    <div id="youtube-container-cbc" style="width: 320px; height: 180px; background-color: #000;"></div>
+    <iframe id="cbc-iframe" width="320" height="180" frameborder="0" allowfullscreen allow="autoplay"></iframe>
     <div class="channel-info">
-        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒) </h3>
-        <button class="control-btn" onclick="document.getElementById('player15').src='/cbciframe'">Reload</button>
+        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒)</h3>
+        <button class="control-btn" onclick="refreshCBC()">🔁 Reload</button>
     </div>
 </div>
+
 
     <div class="channel-container">
         <img src="/static/logos/aljadeed.png" alt="Al jadeed Logo" width="100">
