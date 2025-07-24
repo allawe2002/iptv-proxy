@@ -109,73 +109,6 @@ login_form = '''
     </div>
 '''
 hls_template = '''
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-function proxyIfHttp(url) {
-    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
-}
-
-function setupHLS(video, streamUrl) {
-    if (video.hlsInstance) {
-        video.hlsInstance.destroy();
-    }
-
-    if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-        video.hlsInstance = hls;
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamUrl;
-    }
-}
-
-function toggleStream(playerId, streamUrl) {
-    var video = document.getElementById(playerId);
-    let finalUrl = proxyIfHttp(streamUrl);
-
-    if (video.hlsInstance || !video.paused) {
-        if (video.hlsInstance) {
-            video.hlsInstance.destroy();
-            video.hlsInstance = null;
-        }
-        video.pause();
-        video.src = "";
-    } else {
-        setupHLS(video, finalUrl);
-        video.play();
-    }
-}
-
-// CBC Embed Logic
-async function loadCBC() {
-    try {
-        const response = await fetch("/api/youtube/cbc-id");
-        const data = await response.json();
-        if (data.iframe_url) {
-            document.getElementById("cbc-iframe").src = data.iframe_url;
-        } else {
-            document.getElementById("cbc-iframe").src = "";
-        }
-    } catch (e) {
-        console.error("CBC Load Error:", e);
-    }
-}
-
-// Load CBC iframe on page load
-window.onload = function() {
-    loadCBC();
-};
-
-function refreshCBC() {
-    loadCBC();
-}
-</script>
-'''
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,8 +153,65 @@ function refreshCBC() {
 </head>
 <body>
 
-
 <script>
+function proxyIfHttp(url) {
+    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+}
+
+function setupHLS(video, streamUrl) {
+    if (video.hlsInstance) {
+        video.hlsInstance.destroy();
+    }
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+    }
+}
+
+function toggleStream(playerId, streamUrl) {
+    var video = document.getElementById(playerId);
+    let finalUrl = proxyIfHttp(streamUrl);
+    if (video.hlsInstance || !video.paused) {
+        if (video.hlsInstance) {
+            video.hlsInstance.destroy();
+            video.hlsInstance = null;
+        }
+        video.pause();
+        video.src = "";
+    } else {
+        setupHLS(video, finalUrl);
+        video.play();
+    }
+}
+
+// CBC Embed Logic
+async function loadCBC() {
+    try {
+        const response = await fetch("/api/youtube/cbc-id");
+        const data = await response.json();
+        if (data.iframe_url) {
+            document.getElementById("cbc-iframe").src = data.iframe_url;
+        } else {
+            document.getElementById("cbc-iframe").src = "";
+        }
+    } catch (e) {
+        console.error("CBC Load Error:", e);
+    }
+}
+
+// Load CBC iframe on page load
+window.onload = function() {
+    loadCBC();
+};
+
+function refreshCBC() {
+    loadCBC();
+}
+
 function toggleYouTube(containerId, videoId) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -243,8 +233,7 @@ function toggleYouTube(containerId, videoId) {
 }
 </script>
 
-</body>
-</html>
+'''
 
     
 
