@@ -11,20 +11,20 @@ PASSCODE = "372420"
 # ✅ CBC YouTube Live ID Auto-Fetch Route
 # ===============================
 @app.route('/api/youtube/cbc-id')
-def get_cbc_live_id():
+def get_cbc_id_from_freeintertv():
     try:
-        url = "https://www.youtube.com/@CBCNews/videos"
+        url = "http://www.freeintertv.com/view/id-672/Canada-News-0-1"
         headers = {"User-Agent": "Mozilla/5.0"}
         response = requests.get(url, headers=headers, timeout=10)
 
-        match = re.search(r'"videoId":"(.*?)","isLive":true', response.text)
+        match = re.search(r'youtube\.com/embed/([a-zA-Z0-9_-]{11})', response.text)
         if match:
             video_id = match.group(1)
             return jsonify({"video_id": video_id})
         else:
-            return jsonify({"error": "No live video found"}), 404
+            return jsonify({"error": "YouTube video ID not found on FreeInterTV"}), 404
     except Exception as e:
-        return jsonify({"error": f"Failed to fetch live video ID: {str(e)}"}), 500
+        return jsonify({"error": f"Error fetching FreeInterTV page: {str(e)}"}), 500
 
 # ===============================
 # ✅ Proxy Route for M3U8/TS
