@@ -193,7 +193,7 @@ function toggleYouTube(containerId, videoId) {
    
 <div class="channel-container">
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
-    <iframe width="500" height="380" 
+    <iframe width="320" height="180" 
             src="https://www.youtube.com/embed/W44Vmriu7to" 
             title="Measles cases in Alberta surpass 1,300" 
             frameborder="0" 
