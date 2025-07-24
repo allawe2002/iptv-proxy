@@ -1,11 +1,15 @@
-from flask import Flask, request, Response, send_file
+from flask import Flask, request, Response, send_file, jsonify
 import requests
 from urllib.parse import urljoin, urlencode
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="/static")
 
-PASSCODE = "372420"
+# ▶️ CBC YouTube live video ID API
+@app.route('/api/youtube/cbc-id')
+def get_cbc_live_id():
+    return jsonify({"video_id": "W44Vmriu7to"})  # Update when needed
 
+# 🔁 Proxy handler for direct or m3u8 streaming
 @app.route('/proxy/')
 def proxy():
     target_url = request.args.get('url')
@@ -21,6 +25,7 @@ def proxy():
         resp = requests.get(target_url, headers=headers, stream=True, timeout=10)
         content_type = resp.headers.get('Content-Type', '')
 
+        # Handle M3U8 rewriting
         if '.m3u8' in target_url or 'application/vnd.apple.mpegurl' in content_type:
             original_content = resp.text
             base_url = target_url.rsplit('/', 1)[0] + '/'
@@ -28,18 +33,16 @@ def proxy():
             def rewrite_line(line):
                 if line.strip().startswith('#') or line.strip() == '':
                     return line + '\n'
-
                 absolute_url = urljoin(base_url, line.strip())
-
                 if target_url.startswith('https://') and absolute_url.startswith('http://') and 'iptvplatinum.net' not in absolute_url:
                     absolute_url = absolute_url.replace('http://', 'https://')
-
                 proxied_url = f"/proxy/?{urlencode({'url': absolute_url})}"
                 return proxied_url + '\n'
 
             rewritten_content = ''.join(rewrite_line(line) for line in original_content.splitlines())
             return Response(rewritten_content, content_type='application/vnd.apple.mpegurl')
 
+        # For non-m3u8 content, stream as is
         return Response(resp.iter_content(chunk_size=8192), content_type=content_type)
 
     except Exception as e:
