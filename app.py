@@ -397,7 +397,7 @@ html_welcome_banner = '''
             <button class="control-btn" onclick="toggleStream('player14', 'https://fl3.moveonjoy.com/CNN/tracks-v1a1/mono.ts.m3u8')">Play/Stop</button>
          </div> 
           </div>
-          '''
+         
 
 
       <script>
@@ -429,6 +429,8 @@ html_welcome_banner = '''
                 video.play();
             }
         }
+</script>
+'''
 hls_template = f'''
 <!DOCTYPE html>
 <html>
