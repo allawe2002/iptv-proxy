@@ -482,7 +482,7 @@ hls_template = f'''
     <script>
     function proxyIfHttp(url) {{
         return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
-    }
+    }}
 
     function setupHLS(video, streamUrl) {
         if (video.hlsInstance) {
@@ -534,7 +534,7 @@ hls_template = f'''
 
     window.onload = function() {
         loadCBC();
-    }}
+    }
     </script>
 </body>
 </html>
