@@ -278,6 +278,7 @@ html_welcome_banner = '''
 <div class="channel-container"> 
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
     <div class="channel-info">
+    '''
         <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (External)</h3>
         <button class="control-btn" onclick="openCBC()">🔁 Open in New Tab</button>
     </div>
