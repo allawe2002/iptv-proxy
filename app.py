@@ -439,8 +439,8 @@ hls_template = f'''
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
-        .channel-container {
+        body {{ font-family: Arial, sans-serif; background-color: #f0f0f0; }}
+        .channel-container {{
             display: flex;
             align-items: center;
             background: #333;
@@ -448,19 +448,19 @@ hls_template = f'''
             margin: 10px;
             padding: 10px;
             border-radius: 8px;
-        }
-        .channel-container iframe, .channel-container video {
+        }}
+        .channel-container iframe, .channel-container video {{
             margin-right: 15px;
             border: 2px solid #007BFF;
-        }
-        .channel-info {
+        }}
+        .channel-info {{
             display: flex;
             flex-direction: column;
-        }
-        .channel-info h3 {
+        }}
+        .channel-info h3 {{
             margin: 0 0 10px 0;
-        }
-        .control-btn {
+        }}
+        .control-btn {{
             margin-top: 5px;
             margin-right: 5px;
             padding: 10px 20px;
@@ -471,7 +471,7 @@ hls_template = f'''
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
+        }}
     </style>
 </head>
 <body>
@@ -481,65 +481,64 @@ hls_template = f'''
 
     <script>
     function proxyIfHttp(url) {{
-        return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+        return url.startsWith('http://') ? `/proxy/?url=${{encodeURIComponent(url)}}` : url;
     }}
 
-    function setupHLS(video, streamUrl) {
-        if (video.hlsInstance) {
+    function setupHLS(video, streamUrl) {{
+        if (video.hlsInstance) {{
             video.hlsInstance.destroy();
-        }
-        if (Hls.isSupported()) {
+        }}
+        if (Hls.isSupported()) {{
             var hls = new Hls();
             hls.loadSource(streamUrl);
             hls.attachMedia(video);
             video.hlsInstance = hls;
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        }} else if (video.canPlayType('application/vnd.apple.mpegurl')) {{
             video.src = streamUrl;
-        }
-    }
+        }}
+    }}
 
-    function toggleStream(playerId, streamUrl) {
+    function toggleStream(playerId, streamUrl) {{
         var video = document.getElementById(playerId);
         let finalUrl = proxyIfHttp(streamUrl);
-        if (video.hlsInstance || !video.paused) {
-            if (video.hlsInstance) {
+        if (video.hlsInstance || !video.paused) {{
+            if (video.hlsInstance) {{
                 video.hlsInstance.destroy();
                 video.hlsInstance = null;
-            }
+            }}
             video.pause();
             video.src = "";
-        } else {
+        }} else {{
             setupHLS(video, finalUrl);
             video.play();
-        }
-    }
+        }}
+    }}
 
-    async function loadCBC() {
-        try {
+    async function loadCBC() {{
+        try {{
             const response = await fetch("/api/youtube/cbc-id");
             const data = await response.json();
-            if (data.iframe_url) {
+            if (data.iframe_url) {{
                 document.getElementById("cbc-iframe").src = data.iframe_url;
-            } else {
+            }} else {{
                 document.getElementById("cbc-iframe").src = "";
-            }
-        } catch (e) {
+            }}
+        }} catch (e) {{
             console.error("CBC Load Error:", e);
-        }
-    }
+        }}
+    }}
 
-    function refreshCBC() {
+    function refreshCBC() {{
         loadCBC();
-    }
+    }}
 
-    window.onload = function() {
+    window.onload = function() {{
         loadCBC();
-    }
+    }}
     </script>
 </body>
 </html>
 '''
-
 
 
 @app.route('/', methods=['GET', 'POST'])
