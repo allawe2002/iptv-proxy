@@ -480,7 +480,7 @@ hls_template = f'''
     {{ channels|safe }}
 
     <script>
-    function proxyIfHttp(url) {
+    function proxyIfHttp(url) {{
         return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
     }
 
@@ -534,7 +534,7 @@ hls_template = f'''
 
     window.onload = function() {
         loadCBC();
-    }
+    }}
     </script>
 </body>
 </html>
