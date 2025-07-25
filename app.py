@@ -63,51 +63,10 @@ login_form = '''
     </div>
 '''
 hls_template = '''
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-<script>
-function proxyIfHttp(url) {
-    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
-}
-
-function setupHLS(video, streamUrl) {
-    if (video.hlsInstance) {
-        video.hlsInstance.destroy();
-    }
-
-    if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-        video.hlsInstance = hls;
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamUrl;
-    }
-}
-
-function toggleStream(playerId, streamUrl) {
-    var video = document.getElementById(playerId);
-    let finalUrl = proxyIfHttp(streamUrl);
-
-    if (video.hlsInstance || !video.paused) {
-        if (video.hlsInstance) {
-            video.hlsInstance.destroy();
-            video.hlsInstance = null;
-        }
-        video.pause();
-        video.src = "";
-    } else {
-        setupHLS(video, finalUrl);
-        video.play();
-    }
-}
-</script>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>TwinStreamTV</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -149,8 +108,49 @@ function toggleStream(playerId, streamUrl) {
 </head>
 <body>
 
+<h1 style="text-align:center; color:#007BFF;">Welcome to TwinStreamTV</h1>
 
+<!-- Channel Blocks Render Here -->
+{{ channels|safe }}
+
+<!-- Scripts -->
 <script>
+function proxyIfHttp(url) {
+    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+}
+
+function setupHLS(video, streamUrl) {
+    if (video.hlsInstance) {
+        video.hlsInstance.destroy();
+    }
+
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+    }
+}
+
+function toggleStream(playerId, streamUrl) {
+    var video = document.getElementById(playerId);
+    let finalUrl = proxyIfHttp(streamUrl);
+
+    if (video.hlsInstance || !video.paused) {
+        if (video.hlsInstance) {
+            video.hlsInstance.destroy();
+            video.hlsInstance = null;
+        }
+        video.pause();
+        video.src = "";
+    } else {
+        setupHLS(video, finalUrl);
+        video.play();
+    }
+}
+
 function toggleYouTube(containerId, videoId) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -170,7 +170,7 @@ function toggleYouTube(containerId, videoId) {
         container.innerHTML = "";
     }
 }
-<script>
+
 async function getCBCUrl() {
     try {
         const res = await fetch("/api/youtube/cbc-id");
@@ -195,6 +195,7 @@ function openCBC() {
 
 </body>
 </html>
+'''
 
     
 
@@ -334,35 +335,35 @@ function openCBC() {
 
 
       <script>
-        function setupHLS(video, streamUrl) {
-            if (video.hlsInstance) {
-                video.hlsInstance.destroy();
-            }
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(streamUrl);
-                hls.attachMedia(video);
-                video.hlsInstance = hls;
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = streamUrl;
-            }
-        }
+function setupHLS(video, streamUrl) {
+    if (video.hlsInstance) {
+        video.hlsInstance.destroy();
+    }
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+    }
+}
 
-        function toggleStream(playerId, streamUrl) {
-            var video = document.getElementById(playerId);
-            if (video.hlsInstance || !video.paused) {
-                if (video.hlsInstance) {
-                    video.hlsInstance.destroy();
-                    video.hlsInstance = null;
-                }
-                video.pause();
-                video.src = "";
-            } else {
-                setupHLS(video, streamUrl);
-                video.play();
-            }
+function toggleStream(playerId, streamUrl) {
+    var video = document.getElementById(playerId);
+    if (video.hlsInstance || !video.paused) {
+        if (video.hlsInstance) {
+            video.hlsInstance.destroy();
+            video.hlsInstance = null;
         }
-    <script>
+        video.pause();
+        video.src = "";
+    } else {
+        setupHLS(video, streamUrl);
+        video.play();
+    }
+}
+
 async function getCBCUrl() {
     try {
         const res = await fetch("/api/youtube/cbc-id");
@@ -386,7 +387,6 @@ function openCBC() {
 </script>
 </body>
 </html>
-'''
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
