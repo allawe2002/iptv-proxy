@@ -1,3 +1,6 @@
+
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request, Response, send_file
 import requests
 from urllib.parse import urljoin, urlencode
