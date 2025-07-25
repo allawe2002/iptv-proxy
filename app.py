@@ -196,7 +196,7 @@ function toggleYouTube(containerId, videoId) {
     <div id="youtube-container-cbc" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
         <h3>📺 𝓐𝓵 𝓜𝓪𝔂𝓪𝓭𝓮𝓮𝓷 (𝓨𝓸𝓾𝓣𝓾𝓫𝓮)</h3>
-        <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'X0alCXqp148')">Play/Stop</button>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'sKF3br31k8I')">Play/Stop</button>
     </div>
 </div>
 
