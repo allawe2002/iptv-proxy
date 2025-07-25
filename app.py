@@ -1,6 +1,3 @@
-
-# -*- coding: utf-8 -*-
-
 from flask import Flask, request, Response, send_file
 import requests
 from urllib.parse import urljoin, urlencode
@@ -66,18 +63,56 @@ login_form = '''
     </div>
 '''
 hls_template = '''
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+function proxyIfHttp(url) {
+    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
+}
+
+function setupHLS(video, streamUrl) {
+    if (video.hlsInstance) {
+        video.hlsInstance.destroy();
+    }
+
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamUrl;
+    }
+}
+
+function toggleStream(playerId, streamUrl) {
+    var video = document.getElementById(playerId);
+    let finalUrl = proxyIfHttp(streamUrl);
+
+    if (video.hlsInstance || !video.paused) {
+        if (video.hlsInstance) {
+            video.hlsInstance.destroy();
+            video.hlsInstance = null;
+        }
+        video.pause();
+        video.src = "";
+    } else {
+        setupHLS(video, finalUrl);
+        video.play();
+    }
+}
+</script>
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>TwinStreamTV</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
         .channel-container {
             display: flex;
             align-items: center;
@@ -87,8 +122,7 @@ hls_template = '''
             padding: 10px;
             border-radius: 8px;
         }
-        .channel-container iframe,
-        .channel-container video {
+        .channel-container iframe, .channel-container video {
             margin-right: 15px;
             border: 2px solid #007BFF;
         }
@@ -111,63 +145,19 @@ hls_template = '''
             border-radius: 5px;
             cursor: pointer;
         }
-        .main-title {
-            text-align: center;
-            color: #007BFF;
-        }
     </style>
 </head>
 <body>
 
-<h1 class="main-title">🎬 𝓦𝓮𝓵𝓬𝓸𝓶𝓮 𝓽𝓸 𝓣𝔀𝓲𝓷𝓢𝓽𝓻𝓮𝓪𝓶𝓣𝓥 🎬</h1>
-
-<img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
-     style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
-
-<!-- Channels rendered dynamically -->
-{{ channels|safe }}
 
 <script>
-function proxyIfHttp(url) {
-    return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
-}
-
-function setupHLS(video, streamUrl) {
-    if (video.hlsInstance) {
-        video.hlsInstance.destroy();
-    }
-    if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-        video.hlsInstance = hls;
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamUrl;
-    }
-}
-
-function toggleStream(playerId, streamUrl) {
-    var video = document.getElementById(playerId);
-    let finalUrl = proxyIfHttp(streamUrl);
-    if (video.hlsInstance || !video.paused) {
-        if (video.hlsInstance) {
-            video.hlsInstance.destroy();
-            video.hlsInstance = null;
-        }
-        video.pause();
-        video.src = "";
-    } else {
-        setupHLS(video, finalUrl);
-        video.play();
-    }
-}
-
 function toggleYouTube(containerId, videoId) {
     const container = document.getElementById(containerId);
     if (!container) {
         console.error("Container not found:", containerId);
         return;
     }
+
     if (container.innerHTML.trim() === "") {
         container.innerHTML = `
             <iframe width="320" height="180"
@@ -180,34 +170,18 @@ function toggleYouTube(containerId, videoId) {
         container.innerHTML = "";
     }
 }
-
-async function getCBCUrl() {
-    try {
-        const res = await fetch("/api/youtube/cbc-id");
-        const data = await res.json();
-        return data.iframe_url;
-    } catch (e) {
-        console.error("❌ CBC Fetch Error:", e);
-        return null;
-    }
-}
-
-function openCBC() {
-    getCBCUrl().then(url => {
-        if (url) {
-            window.open(url, "_blank");
-        } else {
-            alert("CBC stream is currently unavailable.");
-        }
-    });
-}
 </script>
 
 </body>
 </html>
-'''
 
-channels_html = '''
+    
+
+<h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
+
+<img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
+     style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
+
 <div class="channel-container">
         <img src="/static/logos/alaraby.png" alt="Alaraby Logo" width="100">
         <video id="player1" width="320" height="180" controls poster="/static/logos/alaraby.png"></video>
@@ -216,16 +190,15 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
-    '''
    
-<div id="cbc-container" class="channel-container">
-    <img src="/static/logos/cbc.png" alt="CBC Logo" width="100">
+<div class="channel-container">
+    <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
+    <div id="youtube-container-cbc" style="width: 320px; height: 180px; background-color: #000;"></div>
     <div class="channel-info">
-        <h3> CBC News (External)</h3>
-        <button class="control-btn" onclick="openCBC()"> Open in New Tab</button>
+        <h3>📺 𝒞𝐵𝒞 𝒩𝑒𝓌𝓈 (𝒴o𝓊𝒯𝓊𝒷𝑒) </h3>
+        <button class="control-btn" onclick="toggleYouTube('youtube-container-cbc', 'W44Vmriu7to')">Play/Stop</button>
     </div>
 </div>
-'''
 
     <div class="channel-container">
         <img src="/static/logos/aljadeed.png" alt="Al jadeed Logo" width="100">
@@ -235,7 +208,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player2', '/proxy/?url=https://samaflix.com:12103/channel7/tracks-v2a1/mono.m3u8')">Play/Stop</button>
         </div>
     </div>
-    '''
     <div class="channel-container">
         <img src="/static/logos/mbc2.png" alt="MBC2 Logo" width="100">
         <video id="player3" width="320" height="180" controls poster="/static/logos/mbc2.png"></video>
@@ -244,7 +216,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player3', 'https://edge66.magictvbox.com/liveApple/MBC_2/index.m3u8')">Play/Stop</button>
         </div>
     </div>
-    '''
 
     <div class="channel-container">
         <img src="/static/logos/aljazeera.png" alt="Al jazeera Logo" width="100">
@@ -254,7 +225,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player4', '/proxy/?url=https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8')">Play/Stop</button>
         </div>
     </div>
-    '''
 
     <div class="channel-container">
         <img src="/static/logos/almayadeen.png" alt="Almayadeen Logo" width="100">
@@ -264,7 +234,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player5', 'https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/chunklist_b2000000.m3u8')">Play/Stop</button>
         </div>
     </div>
-    '''
 
         <div class="channel-container">
         <img src="/static/logos/mtv.png" alt="MTV Lebanon Logo" width="100">
@@ -274,7 +243,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player6', 'https://hms.pfs.gdn/v1/broadcast/mtv/playlist.m3u8')">Play/Stop</button>
        </div>
      </div>
-     '''
     
     <div class="channel-container">
         <img src="/static/logos/nbn.png" alt="NBN Logo" width="100">
@@ -284,7 +252,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player7', 'https://samaflix.com:12103/channel5/tracks-v2a1/mono.m3u8')">Play/Stop</button>
      </div>
      </div>
-     '''
 
      <div class="channel-container">
     <img src="/static/logos/tlc.png" alt="TLC Logo" width="100">
@@ -295,7 +262,6 @@ channels_html = '''
 
  </div>
 </div>
-'''
 
 <div class="channel-container">
         <img src="/static/logos/dhafra.png" alt="Dhafra Tv Logo" width="100">
@@ -305,7 +271,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player9', '/proxy/?url=https://rtmp-live-ingest-eu-west-3-universe-dacast-com.akamaized.net/transmuxv1/streams/dbb8ac05-a020-784c-3a95-6ed027941532.m3u8')">Play/Stop</button>
      </div>
      </div>
-     '''
      <div class="channel-container">
         <img src="/static/logos/dubaizaman.png" alt="Dubai Zaman Logo" width="100">
         <video id="player10" width="320" height="180" controls poster="/static/logos/dubaizaman.png"></video>
@@ -314,7 +279,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player10', '/proxy/?url=https://dmiffthftl.cdn.mangomolo.com/dubaizaman/smil:dubaizaman.stream.smil/chunklist_b725000.m3u8')">Play/Stop</button>
      </div>
      </div>
-     '''
       <div class="channel-container">
         <img src="/static/logos/manartv.png" alt="Al Manar TV Logo" width="100">
         <video id="player11" width="320" height="180" controls poster="/static/logos/manartv.png"></video>
@@ -323,7 +287,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player11', 'https://edge.fastpublish.me/live/index.fmp4.m3u8')">Play/Stop</button>
      </div>
      </div>
-     '''
      <div class="channel-container">
         <img src="/static/logos/hgtv.png" alt="HGTV Logo" width="100">
         <video id="player12" width="320" height="180" controls poster="/static/logos/hgtv.png"></video>
@@ -332,7 +295,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player12', 'https://v13.thetvapp.to/hls/HGTVEast/tracks-v2a1/mono.m3u8?token=9LmbymoAF5sm_LfX_oW12Q&expires=1753277219&user_id=NHd4UFJLM3ZqWFByU21WTGhhQ1FPUkI1bm5UR2QzSkdlTjE3NGtkbw==')">Play/Stop</button>
      </div>
      </div>
-     '''
      <div class="channel-container">
         <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
         <video id="player13" width="320" height="180" controls poster="/static/logos/cbc.png"></video>
@@ -341,7 +303,6 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player13', 'https://apollo.production-public.tubi.io/live/ac-cbc2.m3u8')">Play/Stop</button>
      </div>
      </div>
-     '''
     <div class="channel-container">
         <img src="/static/logos/cnn.png" alt="CNN USA Logo" width="100">
         <video id="player14" width="320" height="180" controls poster="/static/logos/cnn.png"></video>
@@ -350,60 +311,38 @@ channels_html = '''
             <button class="control-btn" onclick="toggleStream('player14', 'https://fl3.moveonjoy.com/CNN/tracks-v1a1/mono.ts.m3u8')">Play/Stop</button>
          </div> 
           </div>
-          '''
 
 
       <script>
-function setupHLS(video, streamUrl) {
-    if (video.hlsInstance) {
-        video.hlsInstance.destroy();
-    }
-    if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-        video.hlsInstance = hls;
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamUrl;
-    }
-}
-
-function toggleStream(playerId, streamUrl) {
-    var video = document.getElementById(playerId);
-    if (video.hlsInstance || !video.paused) {
-        if (video.hlsInstance) {
-            video.hlsInstance.destroy();
-            video.hlsInstance = null;
+        function setupHLS(video, streamUrl) {
+            if (video.hlsInstance) {
+                video.hlsInstance.destroy();
+            }
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                video.hlsInstance = hls;
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+            }
         }
-        video.pause();
-        video.src = "";
-    } else {
-        setupHLS(video, streamUrl);
-        video.play();
-    }
-}
 
-async function getCBCUrl() {
-    try {
-        const res = await fetch("/api/youtube/cbc-id");
-        const data = await res.json();
-        return data.iframe_url;
-    } catch (e) {
-        console.error("❌ CBC Fetch Error:", e);
-        return null;
-    }
-}
-
-function openCBC() {
-    getCBCUrl().then(url => {
-        if (url) {
-            window.open(url, "_blank");
-        } else {
-            alert("CBC stream is currently unavailable.");
+        function toggleStream(playerId, streamUrl) {
+            var video = document.getElementById(playerId);
+            if (video.hlsInstance || !video.paused) {
+                if (video.hlsInstance) {
+                    video.hlsInstance.destroy();
+                    video.hlsInstance = null;
+                }
+                video.pause();
+                video.src = "";
+            } else {
+                setupHLS(video, streamUrl);
+                video.play();
+            }
         }
-    });
-}
-</script>
+    </script>
 </body>
 </html>
 '''
