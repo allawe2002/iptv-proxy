@@ -221,7 +221,7 @@ channels_html = '''
 <div id="cbc-container" class="channel-container">
     <img src="/static/logos/cbc.png" alt="CBC Logo" width="100">
     <div class="channel-info">
-        <h3>📺 CBC News (External)</h3>
+        <h3> CBC News (External)</h3>
         <button class="control-btn" onclick="openCBC()">🔁 Open in New Tab</button>
     </div>
 </div>
