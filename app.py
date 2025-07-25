@@ -170,6 +170,27 @@ function toggleYouTube(containerId, videoId) {
         container.innerHTML = "";
     }
 }
+<script>
+async function getCBCUrl() {
+    try {
+        const res = await fetch("/api/youtube/cbc-id");
+        const data = await res.json();
+        return data.iframe_url;
+    } catch (e) {
+        console.error("❌ CBC Fetch Error:", e);
+        return null;
+    }
+}
+
+function openCBC() {
+    getCBCUrl().then(url => {
+        if (url) {
+            window.open(url, "_blank");
+        } else {
+            alert("CBC stream is currently unavailable.");
+        }
+    });
+}
 </script>
 
 </body>
