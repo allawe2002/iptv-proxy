@@ -64,14 +64,17 @@ login_form = '''
 '''
 hls_template = '''
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>TwinStreamTV</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
         .channel-container {
             display: flex;
             align-items: center;
@@ -81,7 +84,8 @@ hls_template = '''
             padding: 10px;
             border-radius: 8px;
         }
-        .channel-container iframe, .channel-container video {
+        .channel-container iframe,
+        .channel-container video {
             margin-right: 15px;
             border: 2px solid #007BFF;
         }
@@ -104,16 +108,19 @@ hls_template = '''
             border-radius: 5px;
             cursor: pointer;
         }
+        .main-title {
+            text-align: center;
+            color: #007BFF;
+        }
     </style>
 </head>
 <body>
 
-<h1 style="text-align:center; color:#007BFF;">Welcome to TwinStreamTV</h1>
+<h1 class="main-title">Welcome to TwinStreamTV</h1>
 
-<!-- Channel Blocks Render Here -->
+<!-- Channels rendered dynamically -->
 {{ channels|safe }}
 
-<!-- Scripts -->
 <script>
 function proxyIfHttp(url) {
     return url.startsWith('http://') ? `/proxy/?url=${encodeURIComponent(url)}` : url;
@@ -123,7 +130,6 @@ function setupHLS(video, streamUrl) {
     if (video.hlsInstance) {
         video.hlsInstance.destroy();
     }
-
     if (Hls.isSupported()) {
         var hls = new Hls();
         hls.loadSource(streamUrl);
@@ -137,7 +143,6 @@ function setupHLS(video, streamUrl) {
 function toggleStream(playerId, streamUrl) {
     var video = document.getElementById(playerId);
     let finalUrl = proxyIfHttp(streamUrl);
-
     if (video.hlsInstance || !video.paused) {
         if (video.hlsInstance) {
             video.hlsInstance.destroy();
@@ -157,7 +162,6 @@ function toggleYouTube(containerId, videoId) {
         console.error("Container not found:", containerId);
         return;
     }
-
     if (container.innerHTML.trim() === "") {
         container.innerHTML = `
             <iframe width="320" height="180"
@@ -196,6 +200,7 @@ function openCBC() {
 </body>
 </html>
 '''
+
 
 <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
 
