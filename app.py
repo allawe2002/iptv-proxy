@@ -261,7 +261,6 @@ window.onload = function () {
 
 html_welcome_banner = '''
 <h1 class="main-title">░W░e░l░c░o░m░e░ ░t░o░ ░T░w░i░n░S░t░r░e░a░m░T░V░ ░P░r░o░x░y░</h1>
-'''
 
 <img src="/logo" alt="TwinStreamTV Logo" class="logo-banner" 
      style="display: block; margin-left: auto; margin-right: auto; width: 60%; height: auto; margin-bottom: 20px;">
@@ -274,6 +273,7 @@ html_welcome_banner = '''
             <button class="control-btn" onclick="toggleStream('player1', '/proxy/?url=https://live.kwikmotion.com/alaraby1live/alaraby_abr/alaraby1publish/alaraby1_source/chunks.m3u8')">Play/Stop</button>
         </div>
     </div>
+    
    
 <div class="channel-container"> 
     <img src="/static/logos/cbc.png" alt="CBC NEWS Logo" width="100">
@@ -283,7 +283,7 @@ html_welcome_banner = '''
         <button class="control-btn" onclick="openCBC()">🔁 Open in New Tab</button>
     </div>
 </div>
-'''
+
 
 
     <div class="channel-container">
@@ -397,6 +397,7 @@ html_welcome_banner = '''
             <button class="control-btn" onclick="toggleStream('player14', 'https://fl3.moveonjoy.com/CNN/tracks-v1a1/mono.ts.m3u8')">Play/Stop</button>
          </div> 
           </div>
+          '''
 
 
       <script>
